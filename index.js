@@ -1,8 +1,15 @@
 const SoundCloud = require('./utils/SoundCloudScraper');
 
-const test = async () => {
-  const res = await SoundCloud.getTracksByPlaylists('k_dubs');
-  console.log(res);
+const allKuhlosulTracks = async () => {
+  const tracks = await SoundCloud.getTracks('k_dubs');
+  const playlistTracks = await SoundCloud.getTracksByPlaylists(
+    'k_dubs',
+    'Kuhlosul'
+  );
+  return Array.from(new Set([...tracks, ...playlistTracks]));
 };
 
-test();
+allKuhlosulTracks().then((res) => {
+  console.log(res);
+  console.log(res.length);
+});

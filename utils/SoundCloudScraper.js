@@ -37,7 +37,6 @@ module.exports = {
       $('.sound__body').each((_i, elem) => {
         const sound = {
           title: $(elem).find('.soundTitle__title > span').text().trim(),
-          artist: $(elem).find('.soundTitle__usernameText').text().trim(),
           url:
             'https://soundcloud.com' +
             $(elem).find('.soundTitle__title').attr('href'),
@@ -49,7 +48,12 @@ module.exports = {
       throw new Error('Failed to pull tracks.');
     }
   },
-  getTracksByPlaylists: async (username) => {
+
+  /*
+   * @param {username} SoundCloud Username
+   * @param {artistName} The name the artist goes by, searching all of their playlists for tracks including their name
+   */
+  getTracksByPlaylists: async (username, artistName) => {
     try {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
@@ -73,9 +77,21 @@ module.exports = {
       const tracks = [];
 
       $('.sound__body').each((_i, elem) => {
-        const listItems = $(elem).children('.compactTrackList__item');
-        console.log($(listItems[0]).attr('class'));
+        const ul = $(elem).find('.compactTrackListItem__trackTitle');
+        $(ul).map((i, li) => {
+          const trackName = $(li).text().trim();
+
+          if (trackName.toLowerCase().includes(artistName.toLowerCase())) {
+            tracks.push({
+              name: $(li).text().trim(),
+              link:
+                'https://soundcloud.com' +
+                $(li).attr('data-permalink-path').split('?in=')[0],
+            });
+          }
+        });
       });
+      return tracks;
     } catch (err) {
       throw new Error('Failed to pull tracks.');
     }
