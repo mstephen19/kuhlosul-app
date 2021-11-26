@@ -1,12 +1,23 @@
-const ScScraper = require('./utils/ScScraper');
-const sc = new ScScraper();
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
 
-const kuhlosul = async () => {
-  const track = await sc.getTrackInfo(
-    'https://soundcloud.com/k_dubs/myro-who-dem-ft-dread-mc-rider-shafique-kuhlosul-remix'
-  );
-  const embedHtml = await sc.getEmbedHtml(track);
-  console.log(embedHtml);
-};
+const db = require('./config/connection');
 
-kuhlosul();
+const routes = require('./routes');
+
+const PORT = process.env.PORT || 3001;
+const app = express();
+
+app.use(logger('dev'));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use(routes);
+
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`);
+  });
+});

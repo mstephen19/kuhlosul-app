@@ -129,7 +129,7 @@ class ScScraper {
   };
 
   /*
-   * @param {obj} Array of objects returned by the getTrackInfo method
+   * @param {obj} Object returned by the getTrackInfo method
    *
    * @returns STRING
    */
@@ -140,6 +140,24 @@ class ScScraper {
       url: obj.embedURL,
     });
     return data.html.replace('\\', '');
+  };
+
+  /*
+   * @param {array} Array of objects returned by the getTracksInfo method
+   *
+   * @returns ARRAY of embed HTML
+   */
+
+  getAllEmbedHtml = async function (array) {
+    const embedsArray = [];
+    for await (let obj of array) {
+      const { data } = await axios({
+        method: 'get',
+        url: obj.embedURL,
+      });
+      embedsArray.push(data.html.replace('\\', ''));
+    }
+    return embedsArray;
   };
 }
 
