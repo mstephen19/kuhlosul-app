@@ -1,34 +1,22 @@
 const SoundCloud = require('soundcloud-scraper');
 const client = new SoundCloud.Client();
-const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-const { autoScroll } = require('./autoScroll');
+const { loadBody } = require('./helpers/loadBody');
 
-module.exports = {
+class ScScraper {
+  constructor() {}
+
   /*
    * @param {username} SoundCloud Username
    * @param {query} 'tracks' or 'reposts' DEFAULT 'tracks'
    * @param {slower} boolean. If true, autoScroll will run slower DEFAULT false
+   *
+   * @returns ARRAY
    */
 
-  getTracks: async (username, query = 'tracks') => {
+  getTracks = async function (username, query = 'tracks') {
     try {
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-      await page.goto(`https://soundcloud.com/${username}/${query}`);
-      await page.setViewport({
-        width: 1200,
-        height: 800,
-      });
-      await page.waitForSelector('#content', { timeout: 1500 });
-
-      await autoScroll(page);
-
-      const body = await page.evaluate(() => {
-        return document.querySelector('body').innerHTML;
-      });
-
-      await browser.close();
+      const body = await loadBody(username, query);
 
       const $ = cheerio.load(body);
 
@@ -47,30 +35,18 @@ module.exports = {
     } catch (err) {
       throw new Error('Failed to pull tracks.');
     }
-  },
+  };
 
   /*
    * @param {username} SoundCloud Username
    * @param {artistName} The name the artist goes by, searching all of their playlists for tracks including their name
+   *
+   * @returns ARRAY
    */
-  getTracksByPlaylists: async (username, artistName) => {
+
+  getTracksByPlaylists = async function (username, artistName) {
     try {
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-      await page.goto(`https://soundcloud.com/${username}/sets`);
-      await page.setViewport({
-        width: 1200,
-        height: 800,
-      });
-      await page.waitForSelector('#content', { timeout: 1500 });
-
-      await autoScroll(page);
-
-      const body = await page.evaluate(() => {
-        return document.querySelector('body').innerHTML;
-      });
-
-      await browser.close();
+      const body = await loadBody(username, 'sets');
 
       const $ = cheerio.load(body);
 
@@ -84,7 +60,7 @@ module.exports = {
           if (trackName.toLowerCase().includes(artistName.toLowerCase())) {
             tracks.push({
               name: $(li).text().trim(),
-              link:
+              url:
                 'https://soundcloud.com' +
                 $(li).attr('data-permalink-path').split('?in=')[0],
             });
@@ -95,5 +71,49 @@ module.exports = {
     } catch (err) {
       throw new Error('Failed to pull tracks.');
     }
-  },
-};
+  };
+
+  /*
+   * @param {username} SoundCloud Username
+   * @param {artistName} The name the artist goes by, searching all of their playlists for tracks including their name
+   *
+   * @returns ARRAY
+   */
+
+  getAllArtistTracks = async function (username, artistName) {
+    const tracks = await this.getTracks(username);
+    const playlistTracks = await this.getTracksByPlaylists(
+      username,
+      artistName
+    );
+    return Array.from(new Set([...tracks, ...playlistTracks]));
+  };
+
+  /*
+   * @param {url} SoundCloud track URL
+   *
+   * @returns OBJECT
+   */
+
+  getTrackInfo = async function (url) {
+    const songInfo = await client.getSongInfo(url);
+    return songInfo;
+  };
+
+  /*
+   * @param {array} Array of objects returned by one of the getArtistTracks functions
+   *
+   * @returns ARRAY
+   */
+
+  getTracksInfo = async function (array) {
+    const infoArr = [];
+    for await (let obj of array) {
+      const songInfo = await client.getSongInfo(obj.url);
+      infoArr.push(songInfo);
+    }
+    return infoArr;
+  };
+}
+
+module.exports = ScScraper;
