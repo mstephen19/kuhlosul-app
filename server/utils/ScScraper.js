@@ -1,4 +1,4 @@
-const { Client, Embed } = require('soundcloud-scraper');
+const { Client } = require('soundcloud-scraper');
 const client = new Client();
 const cheerio = require('cheerio');
 const { loadProfileBody } = require('./helpers/loadProfileBody');
@@ -7,6 +7,14 @@ const axios = require('axios');
 class ScScraper {
   constructor() {}
 
+  getUser = async function (username) {
+    try {
+      const userInfo = await client.getUser(username);
+      return userInfo;
+    } catch (err) {
+      throw new Error('Failed to grab user info.');
+    }
+  };
   /*
    * @param {username} SoundCloud Username
    * @param {query} 'tracks' or 'reposts' DEFAULT 'tracks'

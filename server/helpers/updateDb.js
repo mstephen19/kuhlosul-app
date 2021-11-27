@@ -7,23 +7,26 @@ module.exports = {
     try {
       const allTracks = await sc.getAllArtistTracks('k_dubs', 'Kuhlosul');
       const tracksInfo = await sc.getTracksInfo(allTracks);
+      const embedLinks = await sc.getAllEmbedHtml(tracksInfo);
 
+      const toInsert = [];
       for await (obj of tracksInfo) {
         const toAdd = {
           title: obj.title,
           thumbnail: obj.thumbnail,
           url: obj.url,
           genre: obj.genre,
+          html: embedLinks[tracksInfo.indexOf(obj)],
           publishedAt: obj.publishedAt,
         };
 
-        await Track.create({ ...toAdd });
+        toInsert.push(toAdd);
         continue;
       }
 
-      const inDb = await Track.find({});
-      console.log(inDb);
-      return inDb;
+      const inserted = await Track.insertMany(toInsert);
+
+      return inserted;
     } catch (err) {
       console.error(err);
     }

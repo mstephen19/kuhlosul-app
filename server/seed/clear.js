@@ -21,4 +21,5 @@ mongoose.connect(
   const confirm = await Track.find({});
   console.log('DB cleared!');
   console.log(confirm);
+  process.exit()
 })();

@@ -19,8 +19,10 @@ mongoose.connect(
 
 (async function () {
   try {
-    await updateDb();
+    const added = await updateDb();
     console.log('Updated!');
+    console.log(added)
+    process.exit();
   } catch (err) {
     console.error(err);
   }
