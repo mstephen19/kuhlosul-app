@@ -1,4 +1,4 @@
-const { Track } = require('../models');
+const { Track, Admin } = require('../models');
 const mongoose = require('mongoose');
 
 mongoose.connect(
@@ -18,8 +18,10 @@ mongoose.connect(
 
 (async function () {
   await Track.deleteMany({});
+  await Admin.deleteMany({});
   const confirm = await Track.find({});
+  const confirm2 = await Admin.find({});
   console.log('DB cleared!');
-  console.log(confirm);
-  process.exit()
+  console.log(confirm, confirm2);
+  process.exit();
 })();

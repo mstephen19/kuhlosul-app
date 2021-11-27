@@ -28,7 +28,7 @@ module.exports = {
 
       return inserted;
     } catch (err) {
-      console.error(err);
+      return err;
     }
   },
 };

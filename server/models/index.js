@@ -1,3 +1,4 @@
 const Track = require('./Track');
+const Admin = require('./Admin');
 
-module.exports = { Track };
+module.exports = { Track, Admin };
