@@ -7,7 +7,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
 
-const routes = require('./routes');
+// const routes = require('./routes');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -28,7 +28,8 @@ app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(routes);
+// Will use GraphQL entirely, instead of REST API
+// app.use(routes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));

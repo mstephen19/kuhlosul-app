@@ -1,9 +1,11 @@
-const { Track, Admin } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
-const { updateDb } = require('../helpers/updateDb');
-const { signToken } = require('../utils/auth');
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
+
+const { Track, Admin } = require('../models');
+
+const { updateDb } = require('../helpers/updateDb');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -37,6 +39,7 @@ const resolvers = {
       return { token, admin };
     },
   },
+  // Define custom type of Date
   Date: new GraphQLScalarType({
     name: 'Date',
     description: 'Date custom scalar type',
