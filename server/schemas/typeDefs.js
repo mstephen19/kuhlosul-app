@@ -7,6 +7,8 @@ const typeDefs = gql`
     password: String
   }
 
+  scalar Date
+
   type Track {
     _id: ID
     title: String
@@ -15,6 +17,11 @@ const typeDefs = gql`
     genre: String
     html: String
     publishedAt: Date
+  }
+
+  type Auth {
+    token: ID!
+    admin: Admin
   }
 
   type Query {
