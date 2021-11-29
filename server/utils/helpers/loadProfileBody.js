@@ -2,8 +2,8 @@ const { autoScroll } = require('./autoScroll');
 const puppeteer = require('puppeteer');
 
 module.exports = {
-  loadProfileBody: async (username, query) => {
-    const browser = await puppeteer.launch();
+  loadProfileBody: async (username, query, boolean = true) => {
+    const browser = await puppeteer.launch({ headless: boolean });
     const page = await browser.newPage();
     await page.goto(`https://soundcloud.com/${username}/${query}`);
     await page.setViewport({

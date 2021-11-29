@@ -23,9 +23,9 @@ class ScScraper {
    * @returns ARRAY
    */
 
-  getTracks = async function (username, query = 'tracks') {
+  getTracks = async function (username, query = 'tracks', headless) {
     try {
-      const body = await loadProfileBody(username, query);
+      const body = await loadProfileBody(username, query, headless);
 
       const $ = cheerio.load(body);
 
@@ -53,9 +53,9 @@ class ScScraper {
    * @returns ARRAY
    */
 
-  getTracksByPlaylists = async function (username, artistName) {
+  getTracksByPlaylists = async function (username, artistName, headless) {
     try {
-      const body = await loadProfileBody(username, 'sets');
+      const body = await loadProfileBody(username, 'sets', headless);
 
       const $ = cheerio.load(body);
 
