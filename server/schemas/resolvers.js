@@ -12,6 +12,12 @@ const resolvers = {
     tracks: async () => {
       return Track.find({});
     },
+    viewdashboard: async (parent, args, context) => {
+      if (!context.admin) return { isAdmin: false };
+      const admin = await Admin.findOne({ _id: context.admin._id });
+      if (admin) return { isAdmin: true };
+      if (!admin) return { isAdmin: false };
+    },
   },
   Mutation: {
     seed: async (parent, { adminId }, context) => {

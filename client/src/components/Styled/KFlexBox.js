@@ -17,6 +17,7 @@ export default function KFlexBox({
         flexDirection: direction === 'column' ? 'column' : 'row',
         width: width,
         height: height,
+        color: 'white',
       }}
       onChange={onChange}
     >

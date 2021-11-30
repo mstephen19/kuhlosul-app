@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import KFlexBox from '../Styled/KFlexBox';
 import KInput from '../Styled/KInput';
 import KButton from '../Styled/KButton';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 export default function AdminLoginForm() {
   const [formValues, setFormValues] = useState({
@@ -9,6 +12,7 @@ export default function AdminLoginForm() {
     password: '',
   });
   const [disabled, setDisabled] = useState(false);
+  const [login, { error, data }] = useMutation(LOGIN);
 
   const handleChange = (e) => {
     const newObj = formValues;
@@ -17,6 +21,25 @@ export default function AdminLoginForm() {
       ? setDisabled(false)
       : setDisabled(true);
     setFormValues(newObj);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formValues);
+    try {
+      const { data } = await login({
+        variables: { ...formValues },
+      });
+
+      Auth.login(data.login.token);
+    } catch (err) {
+      console.log(err);
+      alert('There was an error logging in');
+    }
+    setFormValues({
+      email: '',
+      password: '',
+    });
   };
 
   return (
@@ -39,7 +62,7 @@ export default function AdminLoginForm() {
         type='password'
         placeholder='Password^123'
       />
-      <KButton disabled={disabled} text='Login' onClick={() => alert('hi')} />
+      <KButton disabled={disabled} text='Login' onClick={handleSubmit} />
     </KFlexBox>
   );
 }

@@ -24,8 +24,13 @@ const typeDefs = gql`
     admin: Admin
   }
 
+  type AdminCheck {
+    isAdmin: Boolean!
+  }
+
   type Query {
     tracks: [Track]
+    viewdashboard: AdminCheck
   }
 
   type Mutation {
