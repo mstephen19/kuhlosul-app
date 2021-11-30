@@ -32,14 +32,15 @@ export default function AdminLoginForm() {
       });
 
       Auth.login(data.login.token);
+
+      setFormValues({
+        email: '',
+        password: '',
+      });
     } catch (err) {
       console.log(err);
       alert('There was an error logging in');
     }
-    setFormValues({
-      email: '',
-      password: '',
-    });
   };
 
   return (

@@ -8,7 +8,7 @@ module.exports = {
       await Track.deleteMany({});
       const allTracks = await sc.getAllArtistTracks('k_dubs', 'Kuhlosul');
       const tracksInfo = await sc.getTracksInfo(allTracks);
-      const embedLinks = await sc.getAllEmbedHtml(tracksInfo);
+      // const embedLinks = await sc.getAllEmbedHtml(tracksInfo);
 
       const toInsert = [];
       for await (obj of tracksInfo) {

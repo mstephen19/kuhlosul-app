@@ -4,6 +4,7 @@ import KButton from '../Styled/KButton';
 import { useMutation, useQuery } from '@apollo/client';
 import { SEED_DATABASE } from '../../utils/mutations';
 import Loading from '../LoadingOverlay/Loading';
+import Auth from '../../utils/auth';
 
 export default function AdminPanel() {
   const [seed, { error, loading, data }] = useMutation(SEED_DATABASE);
@@ -18,6 +19,10 @@ export default function AdminPanel() {
     }
   };
 
+  const handleLogOut = () => {
+    Auth.logout();
+  };
+
   return (
     <KFlexBox>
       {loading && <Loading text='This will take a bit...' />}
@@ -26,6 +31,7 @@ export default function AdminPanel() {
         disabled={false}
         onClick={handleUpdateDb}
       />
+      <KButton text='Log Out' disabled={false} onClick={handleLogOut} />
     </KFlexBox>
   );
 }
