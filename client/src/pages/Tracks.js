@@ -21,12 +21,48 @@ export default function Tracks() {
       return !track.title.toLowerCase().includes('eargsm');
     });
 
+  console.log(allTracks);
+
   return (
-    <KFlexBox direction='column' width='100%' height='100%'>
-      {loading && <Loading />}
-      {allTracks.map((track) => {
-        return <img src={track.thumbnail} />;
-      })}
+    <KFlexBox direction='column' width='100vw' height='auto'>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          width: '90vw',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {loading && <Loading />}
+        {allTracks.map((track) => {
+          return (
+            <a
+              href={track.url}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                margin: '10px',
+                width: 'clamp(300px, 80vw, 450px)',
+              }}
+            >
+              <KFlexBox width='75%' height='auto' direction='column'>
+                <img
+                  src={track.thumbnail}
+                  alt={track.title}
+                  style={{
+                    width: 'clamp(300px, 80vw, 450px)',
+                    borderRadius: '5px',
+                  }}
+                />
+                <p style={{ textAlign: 'center' }}>{track.title}</p>
+              </KFlexBox>
+            </a>
+          );
+        })}
+      </div>
     </KFlexBox>
   );
 }

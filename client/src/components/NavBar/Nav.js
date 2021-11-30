@@ -10,7 +10,7 @@ export default function Nav() {
         position: 'sticky',
         top: '0',
         right: '0',
-        background: 'orange',
+        background: '#303134',
       }}
     ></Box>
   );

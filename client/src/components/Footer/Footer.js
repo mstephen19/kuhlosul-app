@@ -9,9 +9,13 @@ export default function Footer() {
       style={{
         height: '50px',
         width: '100vw',
-        background: 'green',
+        background: '#303134',
         margin: '0',
         padding: '0,',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column',
       }}
     >
       <Link to='/login'>Admin login</Link>
