@@ -10,7 +10,8 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     tracks: async () => {
-      return Track.find({});
+      const tracks = await Track.find({});
+      return tracks;
     },
     viewdashboard: async (parent, args, context) => {
       if (!context.admin) return { isAdmin: false };
