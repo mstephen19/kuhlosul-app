@@ -1,10 +1,17 @@
 import React from 'react';
-import { AppBar, Toolbar } from '@mui/material/';
+import { Box } from 'rebass';
 
 export default function Nav() {
   return (
-    <AppBar position='sticky' color='primary'>
-      <Toolbar></Toolbar>
-    </AppBar>
+    <Box
+      style={{
+        height: '75px',
+        width: '100vw',
+        position: 'sticky',
+        top: '0',
+        right: '0',
+        background: 'orange',
+      }}
+    ></Box>
   );
 }

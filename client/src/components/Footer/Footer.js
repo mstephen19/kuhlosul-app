@@ -5,7 +5,15 @@ import { Box } from 'rebass';
 
 export default function Footer() {
   return (
-    <Box sx={{ height: '100px', width: '100vw', background: 'green' }}>
+    <Box
+      style={{
+        height: '50px',
+        width: '100vw',
+        background: 'green',
+        margin: '0',
+        padding: '0,',
+      }}
+    >
       <Link to='/login'>Admin login</Link>
     </Box>
   );

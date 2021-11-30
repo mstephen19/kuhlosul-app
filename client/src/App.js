@@ -8,7 +8,7 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
-// import Nav from './components/NavBar/Nav';
+import Nav from './components/NavBar/Nav';
 import Footer from './components/Footer/Footer';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
@@ -38,7 +38,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        {/* <Nav /> */}
+        <Nav />
         <Route exact path='/' component={Home} />
         <Route exact path='/login' component={AdminLogin} />
         <Route exact path='/dashboard' component={AdminDashboard} />

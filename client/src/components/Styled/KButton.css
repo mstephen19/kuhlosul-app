@@ -1,0 +1,20 @@
+.k-button {
+  cursor: pointer;
+  background: #4f4f4f;
+  font-size: 1rem;
+  color: black;
+  padding: 10px 15px 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.k-button:hover {
+  color: white;
+}
+
+.k-button:disabled {
+  pointer-events: none;
+  background: rgba(180, 180, 180, 0.295);
+  opacity: 50%;
+}
