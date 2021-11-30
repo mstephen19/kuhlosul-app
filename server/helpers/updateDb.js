@@ -5,6 +5,7 @@ const { Track } = require('../models');
 module.exports = {
   updateDb: async function () {
     try {
+      await Track.deleteMany({});
       const allTracks = await sc.getAllArtistTracks('k_dubs', 'Kuhlosul');
       const tracksInfo = await sc.getTracksInfo(allTracks);
       const embedLinks = await sc.getAllEmbedHtml(tracksInfo);
@@ -16,10 +17,10 @@ module.exports = {
           thumbnail: obj.thumbnail,
           url: obj.url,
           genre: obj.genre,
-          html: embedLinks[tracksInfo.indexOf(obj)],
+          // html: embedLinks[tracksInfo.indexOf(obj)],
           publishedAt: obj.publishedAt,
         };
-
+        // if (!toAdd.title.toLowercase().includes('eargsm'))
         toInsert.push(toAdd);
         continue;
       }

@@ -13,10 +13,9 @@ const trackSchema = new Schema({
   genre: {
     type: String,
   },
-  html: {
-    type: String,
-    unique: true,
-  },
+  // html: {
+  //   type: String,
+  // },
   publishedAt: {
     type: Date,
   },

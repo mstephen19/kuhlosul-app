@@ -11,3 +11,11 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const SEED_DATABASE = gql`
+  mutation seed {
+    seed {
+      title
+    }
+  }
+`;

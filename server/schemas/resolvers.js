@@ -20,9 +20,11 @@ const resolvers = {
     },
   },
   Mutation: {
-    seed: async (parent, { adminId }, context) => {
-      const checkAdmin = await Admin.findById(adminId);
-      if (checkAdmin && context.admin) {
+    seed: async (parent, args, context) => {
+      if (!context.admin)
+        return new AuthenticationError('Failed to authenticate Admin');
+      const checkAdmin = await Admin.findById(context.admin._id);
+      if (!checkAdmin) {
         return new AuthenticationError('Failed to authenticate Admin');
       }
 
@@ -30,6 +32,7 @@ const resolvers = {
       if (!updated) {
         return new Error('Failed to update the database');
       }
+      // console.log(updated);
       return updated;
     },
     login: async (parent, { email, password }) => {

@@ -2,7 +2,7 @@ const { Track, Admin } = require('../models');
 const mongoose = require('mongoose');
 
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/mason',
+  process.env.MONGODB_URI || 'mongodb://localhost/masondb',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
