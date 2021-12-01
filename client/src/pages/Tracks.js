@@ -21,8 +21,6 @@ export default function Tracks() {
       return !track.title.toLowerCase().includes('eargsm');
     });
 
-  console.log(allTracks);
-
   return (
     <KFlexBox direction='column' width='100vw' height='auto'>
       <div
@@ -47,6 +45,9 @@ export default function Tracks() {
                 margin: '10px',
                 width: 'clamp(300px, 80vw, 450px)',
               }}
+              key={track._id}
+              target='_blank'
+              rel='noreferrer'
             >
               <KFlexBox width='75%' height='auto' direction='column'>
                 <img

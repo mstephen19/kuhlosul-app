@@ -1,0 +1,10 @@
+li {
+  cursor: pointer;
+  margin-bottom: 10px;
+  color: white;
+}
+
+li:hover {
+  background: grey;
+  color: #212121;
+}
