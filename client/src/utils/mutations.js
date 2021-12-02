@@ -19,3 +19,12 @@ export const SEED_DATABASE = gql`
     }
   }
 `;
+
+export const CHANGE_PASSWORD = gql`
+  mutation changePassword($password: String!) {
+    changePassword(password: $password) {
+      _id
+      email
+    }
+  }
+`;

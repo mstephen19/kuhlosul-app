@@ -2,7 +2,14 @@ import React from 'react';
 import { Input, Label } from '@rebass/forms';
 import { Box } from 'rebass';
 
-export default function KInput({ id, label, type, placeholder, onChange }) {
+export default function KInput({
+  id,
+  label,
+  type,
+  placeholder,
+  onChange,
+  color = 'white',
+}) {
   return (
     <Box style={{ width: '100%' }}>
       <Label htmlFor={id} style={{ color: 'white', fontStyle: 'italic' }}>
@@ -13,7 +20,7 @@ export default function KInput({ id, label, type, placeholder, onChange }) {
         name={type}
         type={type}
         placeholder={placeholder}
-        style={{ color: 'white' }}
+        style={{ color: color }}
         onChange={onChange}
       />
     </Box>
