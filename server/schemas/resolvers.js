@@ -48,6 +48,18 @@ const resolvers = {
       const token = signToken(admin);
       return { token, admin };
     },
+    changePassword: async (parent, { password }, context) => {
+      if (!context.admin)
+        return new AuthenticationError('Failed to authenticate Admin');
+
+      const withNewPassword = await Admin.findOneAndUpdate(
+        { _id: context.admin._id },
+        { password: password },
+        { new: true }
+      );
+
+      return withNewPassword;
+    },
   },
   // Define custom type of Date
   Date: new GraphQLScalarType({

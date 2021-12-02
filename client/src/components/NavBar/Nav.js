@@ -26,7 +26,7 @@ export default function Nav() {
         zIndex: '999',
       }}
     >
-      <Icon onClick={handleClick} />
+      <Icon onClick={handleClick} animated={dropdown ? true : false} />
       <DropDown position={dropdown ? 'down' : 'up'} onClick={handleClick} />
     </Box>
   );

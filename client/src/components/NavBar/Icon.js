@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './icon.css';
 
-export default function Icon({ onClick }) {
-  const [animated, toggleAnimate] = useState(false);
-
-  const handleClick = () => {
-    toggleAnimate(!animated);
-  };
-
+export default function Icon({ animated, onClick }) {
   return (
     <div
       style={{
@@ -20,7 +14,6 @@ export default function Icon({ onClick }) {
         cursor: 'pointer',
       }}
       onClick={() => {
-        handleClick();
         onClick();
       }}
     >
