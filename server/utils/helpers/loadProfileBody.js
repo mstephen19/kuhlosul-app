@@ -3,7 +3,10 @@ const puppeteer = require('puppeteer');
 
 module.exports = {
   loadProfileBody: async (username, query, boolean = true) => {
-    const browser = await puppeteer.launch({ headless: boolean });
+    const browser = await puppeteer.launch({
+      headless: boolean,
+      args: ['--no-sandbox'],
+    });
     const page = await browser.newPage();
     await page.goto(`https://soundcloud.com/${username}/${query}`);
     await page.setViewport({
