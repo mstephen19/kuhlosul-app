@@ -5,6 +5,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { SEED_DATABASE } from '../../utils/mutations';
 import Loading from '../LoadingOverlay/Loading';
 import PasswordModal from './PasswordModal';
+import NewAdminModal from './NewAdminModal';
 import Auth from '../../utils/auth';
 import { Modal, Button } from 'react-bootstrap';
 import { GET_TRACKS } from '../../utils/queries';
@@ -14,6 +15,7 @@ export default function AdminPanel() {
   const [seed, { error, loading, data }] = useMutation(SEED_DATABASE);
   const tracksRes = useQuery(GET_TRACKS);
   const [modalShow, setModalShow] = useState(false);
+  const [adminModalShow, setAdminModalShow] = useState(false);
 
   const tracks = tracksRes?.data?.tracks || [];
 
@@ -54,21 +56,27 @@ export default function AdminPanel() {
       >
         <h2>Admin Functions</h2>
         <KButton
-          text='Update Database'
-          disabled={loading ? true : false}
-          onClick={handleShow}
-          style={{ width: '85%', marginBottom: '5px' }}
-        />
-        <KButton
           text='Log Out'
           disabled={false}
           onClick={handleLogOut}
-          style={{ width: '85%', marginBottom: '5px' }}
+          style={{ width: '85%', marginBottom: '5px', background: 'red' }}
         />
         <KButton
           text='Change Password'
           disabled={false}
           onClick={() => setModalShow(true)}
+          style={{ width: '85%', marginBottom: '5px' }}
+        />
+        <KButton
+          text='Create New Admin'
+          disabled={false}
+          onClick={() => setAdminModalShow(true)}
+          style={{ width: '85%', marginBottom: '5px' }}
+        />
+        <KButton
+          text='Update Database'
+          disabled={loading ? true : false}
+          onClick={handleShow}
           style={{ width: '85%', marginBottom: '5px' }}
         />
       </div>
@@ -83,6 +91,9 @@ export default function AdminPanel() {
         }}
       >
         <h2>Your Tracks</h2>
+        <p style={{ fontStyle: 'italic' }}>
+          Please note: On the "Tracks" page these are filtered and sorted.
+        </p>
         {tracks.map((track) => {
           return (
             <a
@@ -132,6 +143,11 @@ export default function AdminPanel() {
       </div>
 
       <PasswordModal show={modalShow} onHide={() => setModalShow(false)} />
+
+      <NewAdminModal
+        show={adminModalShow}
+        onHide={() => setAdminModalShow(false)}
+      />
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>

@@ -19,6 +19,7 @@ export default function Footer() {
       }}
     >
       <Link to='/login'>Admin login</Link>
+      <Link to='/contact'>Admin login</Link>
     </Box>
   );
 }

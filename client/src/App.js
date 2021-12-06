@@ -14,6 +14,7 @@ import AdminLogin from './pages/AdminLogin';
 import Home from './pages/Home';
 import Tracks from './pages/Tracks';
 import NotFound from './pages/NotFound';
+import Contact from './pages/Contact';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -46,6 +47,7 @@ export default function App() {
           <Route exact path='/tracks' component={Tracks} />
           <Route exact path='/login' component={AdminLogin} />
           <Route exact path='/dashboard' component={AdminDashboard} />
+          <Route exact path='/contact' component={Contact} />
           <Route component={NotFound} />
         </Switch>
         <Footer />

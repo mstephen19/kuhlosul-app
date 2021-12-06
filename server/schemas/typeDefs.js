@@ -37,6 +37,7 @@ const typeDefs = gql`
     login(email: String!, password: String!): Auth
     seed: [Track]
     changePassword(password: String!): Admin
+    createAdmin(email: String!, password: String!): Admin
   }
 `;
 

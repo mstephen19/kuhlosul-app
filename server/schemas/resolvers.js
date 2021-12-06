@@ -63,6 +63,18 @@ const resolvers = {
 
       return withNewPassword;
     },
+    createAdmin: async (parent, args, context) => {
+      if (!context.admin)
+        return new AuthenticationError('Failed to authenticate current Admin');
+
+      try {
+        const newAdmin = await Admin.create(args);
+
+        return newAdmin;
+      } catch (err) {
+        console.error(err);
+      }
+    },
   },
   // Define custom type of Date
   Date: new GraphQLScalarType({

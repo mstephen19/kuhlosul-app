@@ -1,5 +1,6 @@
 module.exports = {
   autoScroll: async function (page) {
+    console.log('*** Scrolling through page ***');
     await page.evaluate(async () => {
       await new Promise((resolve, reject) => {
         let totalHeight = 0;

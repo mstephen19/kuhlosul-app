@@ -22,7 +22,6 @@ module.exports = {
     });
 
     await browser.close();
-    console.log(body);
     return body;
   },
 };

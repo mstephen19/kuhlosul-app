@@ -28,3 +28,12 @@ export const CHANGE_PASSWORD = gql`
     }
   }
 `;
+
+export const CREATE_ADMIN = gql`
+  mutation createAdmin($email: String!, $password: String!) {
+    createAdmin(email: $email, password: $password) {
+      _id
+      email
+    }
+  }
+`;
