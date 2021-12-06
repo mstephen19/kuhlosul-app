@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <Box
       style={{
-        height: '50px',
+        height: '75px',
         width: '100vw',
         background: '#303134',
         margin: '0',
@@ -18,8 +18,22 @@ export default function Footer() {
         flexDirection: 'column',
       }}
     >
-      <Link to='/login'>Admin login</Link>
-      <Link to='/contact'>Admin login</Link>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          height: '100%',
+        }}
+      >
+        <Link to='/contact'>Contact</Link>
+        <Link to='/login'>Admin login</Link>
+        <p style={{ fontSize: '0.75rem' }}>
+          Created with ❤️ by
+          <a href='https://github.com/mstephen19'> Matt Stephens</a>
+        </p>
+      </div>
     </Box>
   );
 }

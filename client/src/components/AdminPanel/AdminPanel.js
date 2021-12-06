@@ -36,7 +36,7 @@ export default function AdminPanel() {
   };
 
   const handleLogOut = () => {
-    Auth.logout();
+    window.confirm('Are you sure you want to log out?') && Auth.logout();
   };
 
   return (
@@ -162,7 +162,7 @@ export default function AdminPanel() {
             No thanks! Close.
           </Button>
           <Button variant='danger' onClick={handleUpdateDb}>
-            Update it.
+            Fuck you. Update it.
           </Button>
         </Modal.Footer>
       </Modal>

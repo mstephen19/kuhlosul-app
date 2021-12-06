@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { GET_TRACKS } from '../utils/queries';
 import KFlexBox from '../components/Styled/KFlexBox';
 import Loading from '../components/LoadingOverlay/Loading';
+import Header from '../components/Styled/Header';
 
 export default function Tracks() {
   const { loading, data } = useQuery(GET_TRACKS);
@@ -23,6 +24,7 @@ export default function Tracks() {
 
   return (
     <KFlexBox direction='column' width='100vw' height='auto'>
+      <Header>My Tracks</Header>
       <div
         style={{
           display: 'flex',

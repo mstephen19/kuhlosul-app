@@ -37,7 +37,7 @@ export default function NewAdminModal(props) {
         },
       });
 
-      if (!data) return alert('Error creating new admin account.');
+      if (!data) return;
 
       setFormValues({
         email: '',
@@ -51,7 +51,7 @@ export default function NewAdminModal(props) {
 
       props.onHide();
     } catch (err) {
-      alert('Error creating new admin account.');
+      return;
     }
   };
 

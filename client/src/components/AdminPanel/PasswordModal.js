@@ -23,13 +23,13 @@ export default function PasswordModal(props) {
         },
       });
 
-      if (!data) return alert('Failed to update password');
+      if (!data) return;
       setPassword('');
       props.onHide();
       return alert('Password changed successfully');
     } catch (err) {
       setPassword('');
-      alert('Failed to update password');
+      return;
     }
   };
 
@@ -68,7 +68,12 @@ export default function PasswordModal(props) {
           Must include at least 8 characters, 1 uppercase character, 1 lowercase
           character, 1 number, and 1 symbol.
         </p>
-        {error && <p style={{ color: 'red' }}>There was an error</p>}
+        {error && (
+          <p style={{ color: 'red' }}>
+            There was an error. Make sure you're following the password
+            guidelines above.
+          </p>
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
