@@ -7,6 +7,8 @@ export default function KFlexBox({
   children,
   evenly,
   onChange,
+  background = 'none',
+  overflow = 'inherit',
 }) {
   return (
     <div
@@ -18,6 +20,8 @@ export default function KFlexBox({
         width: width,
         height: height,
         color: 'white',
+        background: background,
+        overflow: overflow,
       }}
       onChange={onChange}
     >

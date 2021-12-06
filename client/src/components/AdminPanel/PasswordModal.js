@@ -4,6 +4,8 @@ import { useMutation } from '@apollo/client';
 import { CHANGE_PASSWORD } from '../../utils/mutations';
 import KInput from '../Styled/KInput';
 import KButton from '../Styled/KButton';
+import Loading from '../LoadingOverlay/Loading';
+import Auth from '../../utils/auth';
 
 export default function PasswordModal(props) {
   const [changePassword, { loading, error, data }] =
@@ -13,6 +15,8 @@ export default function PasswordModal(props) {
 
   const handleClick = async () => {
     try {
+      if (!Auth.loggedIn()) return;
+
       const { data } = await changePassword({
         variables: {
           password: password,
@@ -51,7 +55,10 @@ export default function PasswordModal(props) {
           onChange={(e) => setPassword(e.target.value)}
           color='black'
         />
-        <KButton text='Show/Hide' onClick={() => toggleShowPw(!showPw)} />
+        <KButton
+          text={!showPw ? 'Show' : 'Hide'}
+          onClick={() => toggleShowPw(!showPw)}
+        />
         <KButton
           disabled={password.length > 8 ? false : true}
           text='Submit'
@@ -61,10 +68,12 @@ export default function PasswordModal(props) {
           Must include at least 8 characters, 1 uppercase character, 1 lowercase
           character, 1 number, and 1 symbol.
         </p>
+        {error && <p style={{ color: 'red' }}>There was an error</p>}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
+      {loading && <Loading />}
     </Modal>
   );
 }

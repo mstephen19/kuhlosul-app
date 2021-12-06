@@ -1,6 +1,7 @@
 import React from 'react';
 import './dropdown.css';
 import { Link } from 'react-router-dom';
+import { uuid } from 'uuidv4';
 
 export default function DropDown({ position, onClick }) {
   const links = [
@@ -48,7 +49,7 @@ export default function DropDown({ position, onClick }) {
       >
         {links.map((link) => {
           return (
-            <Link to={link.route} onClick={onClick}>
+            <Link to={link.route} onClick={onClick} key={uuid()}>
               <li>{link.name}</li>
             </Link>
           );
