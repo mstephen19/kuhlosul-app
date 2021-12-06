@@ -31,9 +31,10 @@ const resolvers = {
         return new AuthenticationError('Failed to authenticate Admin');
       }
 
+      updateDb();
+
       const tracks = await Track.find({});
 
-      updateDb();
       // if (!updated) {
       //   return new Error('Failed to update the database');
       // }

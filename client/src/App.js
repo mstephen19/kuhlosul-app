@@ -6,15 +6,16 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React from 'react';
 
-import Nav from './components/NavBar/Nav';
-import Footer from './components/Footer/Footer';
-import AdminDashboard from './pages/AdminDashboard';
-import AdminLogin from './pages/AdminLogin';
-import Home from './pages/Home';
-import Tracks from './pages/Tracks';
-import NotFound from './pages/NotFound';
-import Contact from './pages/Contact';
+const Nav = React.lazy(() => import('./components/NavBar/Nav'));
+const Footer = React.lazy(() => import('./components/Footer/Footer'));
+const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
+const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
+const Home = React.lazy(() => import('./pages/Home'));
+const Tracks = React.lazy(() => import('./pages/Tracks'));
+const NotFound = React.lazy(() => import('./pages/NotFound'));
+const Contact = React.lazy(() => import('./pages/Contact'));
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,18 +41,20 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Nav />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/tracks' component={Tracks} />
-          <Route exact path='/login' component={AdminLogin} />
-          <Route exact path='/dashboard' component={AdminDashboard} />
-          <Route exact path='/contact' component={Contact} />
-          <Route component={NotFound} />
-        </Switch>
-        <Footer />
-      </Router>
+      <React.Suspense fallback={<p>Loading...</p>}>
+        <Router>
+          <Nav />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/tracks' component={Tracks} />
+            <Route exact path='/login' component={AdminLogin} />
+            <Route exact path='/dashboard' component={AdminDashboard} />
+            <Route exact path='/contact' component={Contact} />
+            <Route component={NotFound} />
+          </Switch>
+          <Footer />
+        </Router>
+      </React.Suspense>
     </ApolloProvider>
   );
 }

@@ -28,7 +28,7 @@ export default function Footer() {
         }}
       >
         <Link to='/contact'>Contact</Link>
-        <Link to='/login'>Admin login</Link>
+        <Link to='/login'>Admin Dashboard</Link>
         <p style={{ fontSize: '0.75rem' }}>
           Created with ❤️ by
           <a href='https://github.com/mstephen19'> Matt Stephens</a>

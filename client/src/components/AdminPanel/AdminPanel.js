@@ -29,6 +29,7 @@ export default function AdminPanel() {
       setShow(false);
       const { data } = await seed();
       if (!data) return alert('Failed to update database');
+      console.log(data);
       return alert('Database will be updated in the background.');
     } catch (err) {
       alert('Failed to update database.');
@@ -40,18 +41,20 @@ export default function AdminPanel() {
   };
 
   return (
-    <KFlexBox height='calc(100vh - 75px)' overflow='hidden'>
-      {loading && <Loading text='This will take a bit...' />}
+    <KFlexBox height='calc(100vh - 75px)' overflow='hidden' wrap>
+      {loading && <Loading />}
       {tracksRes.loading && <Loading />}
 
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          height: '100%',
+          height: 'auto',
           width: '30%',
           alignItems: 'center',
           textAlign: 'center',
+          minWidth: '250px',
+          flexGrow: '1',
         }}
       >
         <h2>Admin Functions</h2>
@@ -88,6 +91,8 @@ export default function AdminPanel() {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'column',
+          minWidth: '350px',
+          flexGrow: '1',
         }}
       >
         <h2>Your Tracks</h2>

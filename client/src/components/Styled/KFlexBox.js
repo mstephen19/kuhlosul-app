@@ -9,6 +9,8 @@ export default function KFlexBox({
   onChange,
   background = 'none',
   overflow = 'inherit',
+  wrap,
+  gap = '0'
 }) {
   return (
     <div
@@ -22,6 +24,8 @@ export default function KFlexBox({
         color: 'white',
         background: background,
         overflow: overflow,
+        flexWrap: wrap ? 'wrap' : 'nowrap',
+        gap: gap
       }}
       onChange={onChange}
     >
