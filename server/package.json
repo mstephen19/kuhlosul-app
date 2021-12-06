@@ -24,10 +24,10 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.6",
     "puppeteer": "^11.0.0",
-    "soundcloud-scraper": "^5.0.2"
+    "soundcloud-scraper": "^5.0.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }
