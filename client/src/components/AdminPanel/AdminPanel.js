@@ -27,7 +27,7 @@ export default function AdminPanel() {
       setShow(false);
       const { data } = await seed();
       if (!data) return alert('Failed to update database');
-      return alert('Database updated!');
+      return alert('Database will be updated in the background.');
     } catch (err) {
       alert('Failed to update database.');
     }

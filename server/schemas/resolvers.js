@@ -31,12 +31,13 @@ const resolvers = {
         return new AuthenticationError('Failed to authenticate Admin');
       }
 
-      const updated = await updateDb();
-      if (!updated) {
-        return new Error('Failed to update the database');
-      }
-      console.table(updated);
-      return updated;
+      const tracks = await Track.find({});
+
+      updateDb();
+      // if (!updated) {
+      //   return new Error('Failed to update the database');
+      // }
+      return tracks;
     },
     login: async (parent, { email, password }) => {
       const admin = await Admin.findOne({ email });
