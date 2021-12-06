@@ -6,6 +6,7 @@ const logger = require('morgan');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
+const { updateDb } = require('./helpers/updateDb');
 
 // const routes = require('./routes');
 
@@ -38,6 +39,8 @@ if (process.env.NODE_ENV === 'production') {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
+setInterval(updateDb, 1000 * 60 * 60 * 12);
 
 db.once('open', () => {
   app.listen(PORT, () => {

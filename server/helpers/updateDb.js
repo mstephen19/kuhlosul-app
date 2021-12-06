@@ -5,6 +5,7 @@ const { Track } = require('../models');
 module.exports = {
   updateDb: async function () {
     try {
+      console.log('*** DATABASE UPDATING ***');
       await Track.deleteMany({});
       const allTracks = await sc.getAllArtistTracks('k_dubs', 'Kuhlosul');
       const tracksInfo = await sc.getTracksInfo(allTracks);

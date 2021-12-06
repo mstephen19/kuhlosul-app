@@ -23,7 +23,7 @@ export default function Nav() {
         boxShadow: '0 0 20px black',
         display: 'flex',
         alignItems: 'center',
-        zIndex: '999',
+        zIndex: '900',
       }}
     >
       <Icon onClick={handleClick} animated={dropdown ? true : false} />

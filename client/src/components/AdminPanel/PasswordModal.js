@@ -59,7 +59,7 @@ export default function PasswordModal(props) {
         />
         <p>
           Must include at least 8 characters, 1 uppercase character, 1 lowercase
-          character, and 1 symbol.
+          character, 1 number, and 1 symbol.
         </p>
       </Modal.Body>
       <Modal.Footer>
