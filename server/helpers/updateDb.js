@@ -28,6 +28,7 @@ module.exports = {
 
       const inserted = await Track.insertMany(toInsert);
 
+      console.log(inserted);
       return inserted;
     } catch (err) {
       return err;

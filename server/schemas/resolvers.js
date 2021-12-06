@@ -35,7 +35,7 @@ const resolvers = {
       if (!updated) {
         return new Error('Failed to update the database');
       }
-      // console.log(updated);
+      console.table(updated);
       return updated;
     },
     login: async (parent, { email, password }) => {
