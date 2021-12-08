@@ -6,7 +6,7 @@ import { useGlobalContext } from '../utils/GlobalContext/GlobalProvider';
 
 export default function Home() {
   return (
-    <KFlexBox direction='column' gap='1rem'>
+    <KFlexBox direction='column' gap='1rem' minHeight='calc(100vh - 75px)'>
       <Header>I am Kuhlosul</Header>
       <KFlexBox width='100%'>
         <KFlexBox width='90%' gap='3rem' wrap>

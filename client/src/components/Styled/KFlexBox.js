@@ -12,6 +12,7 @@ export default function KFlexBox({
   wrap,
   gap = '0',
   overflowY,
+  minHeight,
 }) {
   return (
     <div
@@ -28,6 +29,7 @@ export default function KFlexBox({
         flexWrap: wrap ? 'wrap' : 'nowrap',
         gap: gap,
         overflowY: overflowY,
+        minHeight: minHeight,
       }}
       onChange={onChange}
     >
