@@ -8,6 +8,8 @@ import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
 
+import { GlobalProvider } from './utils/GlobalContext/GlobalProvider';
+
 const Nav = React.lazy(() => import('./components/NavBar/Nav'));
 const Footer = React.lazy(() => import('./components/Footer/Footer'));
 const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
@@ -41,20 +43,22 @@ const client = new ApolloClient({
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <React.Suspense fallback={<p>Loading...</p>}>
-        <Router>
-          <Nav />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/tracks' component={Tracks} />
-            <Route exact path='/login' component={AdminLogin} />
-            <Route exact path='/dashboard' component={AdminDashboard} />
-            <Route exact path='/contact' component={Contact} />
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
-        </Router>
-      </React.Suspense>
+      <GlobalProvider>
+        <React.Suspense fallback={<p>Loading...</p>}>
+          <Router>
+            <Nav />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/tracks' component={Tracks} />
+              <Route exact path='/login' component={AdminLogin} />
+              <Route exact path='/dashboard' component={AdminDashboard} />
+              <Route exact path='/contact' component={Contact} />
+              <Route component={NotFound} />
+            </Switch>
+            <Footer />
+          </Router>
+        </React.Suspense>
+      </GlobalProvider>
     </ApolloProvider>
   );
 }

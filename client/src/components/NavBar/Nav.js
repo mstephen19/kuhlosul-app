@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box } from 'rebass';
 import Icon from './Icon';
 import DropDown from './DropDown';
+import logoWhite from '../../assets/logowhite.png';
 
 export default function Nav() {
   const [dropdown, toggleDropdown] = useState(false);
@@ -28,6 +29,24 @@ export default function Nav() {
     >
       <Icon onClick={handleClick} animated={dropdown ? true : false} />
       <DropDown position={dropdown ? 'down' : 'up'} onClick={handleClick} />
+      <div style={{ width: 'calc(100vw - 70px)' }}>
+        <div
+          style={{
+            height: '50px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            marginRight: '70px',
+          }}
+        >
+          <img
+            src={logoWhite}
+            alt='Logo'
+            style={{ objectFit: 'cover', height: '500%' }}
+          />
+        </div>
+      </div>
     </Box>
   );
 }
