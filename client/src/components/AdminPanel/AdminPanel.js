@@ -18,6 +18,19 @@ export default function AdminPanel() {
   const [adminModalShow, setAdminModalShow] = useState(false);
 
   const tracks = tracksRes?.data?.tracks || [];
+  const allTracksMap = {};
+  tracks.forEach((track) => {
+    if (!allTracksMap[track.title]) {
+      allTracksMap[track.title] = track;
+    }
+  });
+  const allTracks = Object.values(allTracksMap)
+    .sort((a, b) => {
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
+    })
+    .filter((track) => {
+      return !track.title.toLowerCase().includes('eargsm');
+    });
 
   const [show, setShow] = useState(false);
 
@@ -99,7 +112,7 @@ export default function AdminPanel() {
         <p style={{ fontStyle: 'italic' }}>
           Please note: On the "Tracks" page these are filtered and sorted.
         </p>
-        {tracks.map((track) => {
+        {allTracks.map((track) => {
           return (
             <a
               href={track.url}
