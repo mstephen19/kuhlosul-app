@@ -63,7 +63,12 @@ export default function AdminLoginForm() {
         type='password'
         placeholder='Password^123'
       />
-      <KButton disabled={disabled} text='Login' onClick={handleSubmit} />
+      <KButton
+        disabled={disabled}
+        text='Login'
+        onClick={handleSubmit}
+        style={{ fontSize: '1.5rem' }}
+      />
     </KFlexBox>
   );
 }

@@ -10,7 +10,8 @@ export default function KFlexBox({
   background = 'none',
   overflow = 'inherit',
   wrap,
-  gap = '0'
+  gap = '0',
+  overflowY,
 }) {
   return (
     <div
@@ -25,7 +26,8 @@ export default function KFlexBox({
         background: background,
         overflow: overflow,
         flexWrap: wrap ? 'wrap' : 'nowrap',
-        gap: gap
+        gap: gap,
+        overflowY: overflowY,
       }}
       onChange={onChange}
     >

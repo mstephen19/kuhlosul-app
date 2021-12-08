@@ -75,31 +75,36 @@ export default function AdminPanel() {
           text='Log Out'
           disabled={false}
           onClick={handleLogOut}
-          style={{ width: '85%', marginBottom: '5px', background: 'red' }}
+          style={{
+            width: '85%',
+            marginBottom: '5px',
+            background: 'red',
+            fontSize: '1.2rem',
+          }}
         />
         <KButton
           text='Change Password'
           disabled={false}
           onClick={() => setModalShow(true)}
-          style={{ width: '85%', marginBottom: '5px' }}
+          style={{ width: '85%', marginBottom: '5px', fontSize: '1.2rem' }}
         />
         <KButton
           text='Create New Admin'
           disabled={false}
           onClick={() => setAdminModalShow(true)}
-          style={{ width: '85%', marginBottom: '5px' }}
+          style={{ width: '85%', marginBottom: '5px', fontSize: '1.2rem' }}
         />
         <KButton
           text='Update Database'
           disabled={loading ? true : false}
           onClick={handleShow}
-          style={{ width: '85%', marginBottom: '5px' }}
+          style={{ width: '85%', marginBottom: '5px', fontSize: '1.2rem' }}
         />
       </div>
       <div
         style={{
           width: '70%',
-          height: '100%',
+          maxHeight: '100%',
           overflowY: 'scroll',
           display: 'flex',
           alignItems: 'center',
@@ -144,7 +149,9 @@ export default function AdminPanel() {
                     objectFit: 'contain',
                   }}
                 />
-                <p style={{ textAlign: 'center' }}>{track.title}</p>
+                <p style={{ textAlign: 'center', fontSize: '1.5rem' }}>
+                  {track.title}
+                </p>
               </div>
               <div
                 style={{

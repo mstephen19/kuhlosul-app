@@ -15,7 +15,7 @@ export default function Home() {
               borderRadius: '100%',
               width: 'clamp(80%, 50%, 500px)',
               maxWidth: '500px',
-              boxShadow: '-5px 5px 0px white',
+              boxShadow: '-10px 10px 0px white',
             }}
             src={profile}
             alt='Kuhlosul Profile'
