@@ -60,7 +60,9 @@ export default function Tracks() {
                     borderRadius: '5px',
                   }}
                 />
-                <p style={{ textAlign: 'center' }}>{track.title}</p>
+                <p style={{ textAlign: 'center', fontSize: '30px' }}>
+                  {track.title}
+                </p>
               </KFlexBox>
             </a>
           );

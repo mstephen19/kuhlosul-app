@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import './dropdown.css';
 import { Link } from 'react-router-dom';
 import { uuid } from 'uuidv4';
+import { useGlobalContext } from '../../utils/GlobalContext/GlobalProvider';
+import { SET_CURRENT_PAGE } from '../../utils/GlobalContext/actions';
+import { reducer } from '../../utils/GlobalContext/reducers';
 
 export default function DropDown({ position, onClick }) {
+  const initialState = useGlobalContext();
+
+  const [{ currentPage }, dispatch] = useReducer(reducer, initialState);
+
+  const handleItemClick = ({ target }) => {
+    dispatch({
+      type: SET_CURRENT_PAGE,
+      payload: target.id,
+    });
+  };
+
   const links = [
     {
       name: 'Home',
@@ -49,8 +63,22 @@ export default function DropDown({ position, onClick }) {
       >
         {links.map((link) => {
           return (
-            <Link to={link.route} onClick={onClick} key={uuid()}>
-              <li>{link.name}</li>
+            <Link
+              to={link.route}
+              onClick={(e) => {
+                handleItemClick(e);
+                onClick();
+              }}
+              key={uuid()}
+            >
+              <li
+                id={link.name}
+                style={{
+                  background: currentPage === link.name ? '#303134' : 'none',
+                }}
+              >
+                {link.name}
+              </li>
             </Link>
           );
         })}

@@ -13,7 +13,7 @@ export default function Header({ children }) {
         flexDirection: 'column',
       }}
     >
-      <h1>{children}</h1>
+      <h1 style={{ fontSize: '45px' }}>{children}</h1>
       <div style={{ width: '80%', height: '1px', background: 'white' }}></div>
     </div>
   );

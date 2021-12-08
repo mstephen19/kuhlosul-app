@@ -2,6 +2,7 @@ import React from 'react';
 import profile from '../assets/profile2.jpg';
 import KFlexBox from '../components/Styled/KFlexBox';
 import Header from '../components/Styled/Header';
+import { useGlobalContext } from '../utils/GlobalContext/GlobalProvider';
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
             style={{
               flex: '1 0 50%',
               maxWidth: '80%',
-              fontSize: '25px',
+              fontSize: 'clamp(25px, 2.5vw, 30px)',
               textAlign: 'center',
             }}
           >

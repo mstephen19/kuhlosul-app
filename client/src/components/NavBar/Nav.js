@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { Box } from 'rebass';
 import Icon from './Icon';
 import DropDown from './DropDown';
@@ -9,7 +9,6 @@ export default function Nav() {
 
   const handleClick = () => {
     toggleDropdown(!dropdown);
-    console.log(dropdown);
   };
 
   return (
@@ -27,7 +26,7 @@ export default function Nav() {
         zIndex: '900',
       }}
     >
-      <Icon onClick={handleClick} animated={dropdown ? true : false} />
+      <Icon onClick={() => handleClick()} animated={dropdown ? true : false} />
       <DropDown position={dropdown ? 'down' : 'up'} onClick={handleClick} />
       <div style={{ width: 'calc(100vw - 70px)' }}>
         <div
