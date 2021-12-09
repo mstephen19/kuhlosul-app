@@ -9,6 +9,7 @@ import NewAdminModal from './NewAdminModal';
 import Auth from '../../utils/auth';
 import { Modal, Button } from 'react-bootstrap';
 import { GET_TRACKS } from '../../utils/queries';
+import UpdateAboutModal from './UpdateAboutModal';
 
 // Later on below the update database button, have a list of all tracks currently in the db
 export default function AdminPanel() {
@@ -16,6 +17,7 @@ export default function AdminPanel() {
   const tracksRes = useQuery(GET_TRACKS);
   const [modalShow, setModalShow] = useState(false);
   const [adminModalShow, setAdminModalShow] = useState(false);
+  const [updateModalShow, setUpdateModalShow] = useState(false);
 
   const tracks = tracksRes?.data?.tracks || [];
   const allTracksMap = {};
@@ -105,6 +107,12 @@ export default function AdminPanel() {
           onClick={handleShow}
           style={{ width: '85%', marginBottom: '5px', fontSize: '1.2rem' }}
         />
+        <KButton
+          text='Update About Page'
+          disabled={false}
+          onClick={() => setUpdateModalShow(true)}
+          style={{ width: '85%', marginBottom: '5px', fontSize: '1.2rem' }}
+        />
       </div>
       <div
         style={{
@@ -175,6 +183,11 @@ export default function AdminPanel() {
       <NewAdminModal
         show={adminModalShow}
         onHide={() => setAdminModalShow(false)}
+      />
+
+      <UpdateAboutModal
+        show={updateModalShow}
+        onHide={() => setUpdateModalShow(false)}
       />
 
       <Modal show={show} onHide={handleClose} animation={false}>

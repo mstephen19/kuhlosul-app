@@ -52,12 +52,14 @@ export default function AdminLoginForm() {
       onChange={handleChange}
     >
       <KInput
+        labelColor='white'
         id='email'
         label='Email'
         type='email'
         placeholder='bigboi@example.com'
       />
       <KInput
+        labelColor='white'
         id='password'
         label='Password'
         type='password'
