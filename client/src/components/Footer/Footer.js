@@ -27,13 +27,23 @@ export default function Footer() {
           height: '100%',
         }}
       >
-        <Link to='/contact' style={{ height: '1.2rem' }}>
-          <p style={{ fontSize: '0.9rem' }}>Contact</p>
+        <Link to='/contact' style={{ height: '1.5rem', cursor: 'pointer' }}>
+          <p style={{ fontSize: '1.5rem', cursor: 'pointer' }}>Contact</p>
         </Link>
-        <Link to='/login' style={{ height: '1.2rem' }}>
-          <p style={{ fontSize: '0.9rem' }}>Admin Dashboard</p>
+        <Link to='/login' style={{ height: '1.5rem', cursor: 'pointer' }}>
+          <p style={{ fontSize: '1.5rem', cursor: 'pointer' }}>
+            Admin Dashboard
+          </p>
         </Link>
-        <p style={{ fontSize: '0.9rem' }}>
+        <p
+          style={{
+            fontSize: 'clamp(0.5rem, 2vw, 1rem)',
+            position: 'absolute',
+            right: '0',
+            height: '0',
+            cursor: 'pointer',
+          }}
+        >
           Created with ❤️ by
           <a href='https://github.com/mstephen19'> Matt Stephens</a>
         </p>
