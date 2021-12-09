@@ -16,7 +16,7 @@ export default function UpdateAboutModal({ ...props }) {
   });
   const query = useQuery(GET_ABOUT);
   const adminCheck = useQuery(VIEW_DASHBOARD);
-  const [sendAboutData, { data, loading, error }] = useMutation(UPDATE_ABOUT, {
+  const [sendAboutData, { loading, error }] = useMutation(UPDATE_ABOUT, {
     update(cache, { data: { updateAbout } }) {
       try {
         const { getAbout } = cache.readQuery({ query: GET_ABOUT });
@@ -108,14 +108,14 @@ export default function UpdateAboutModal({ ...props }) {
           defaultValue={formValues.body}
         />
         <KButton disabled={false} text='Submit' onClick={handleSubmit} />
-        {query.error || isAdmin.error ? (
+        {query.error || isAdmin.error || error ? (
           <p style={{ color: 'red' }}>There was an error somewhere.</p>
         ) : null}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
-      {query.loading || isAdmin.loading ? <Loading /> : null}
+      {query.loading || isAdmin.loading || loading ? <Loading /> : null}
     </Modal>
   );
 }
