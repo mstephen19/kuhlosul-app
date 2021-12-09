@@ -8,11 +8,12 @@ export default function Footer() {
     <Box
       style={{
         height: '75px',
+        display: 'block',
+        position: 'static',
         width: '100vw',
         background: '#303134',
         margin: '0',
         padding: '0,',
-        display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',

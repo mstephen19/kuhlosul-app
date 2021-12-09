@@ -54,7 +54,12 @@ export default function AdminPanel() {
   };
 
   return (
-    <KFlexBox height='calc(100vh - 75px)' overflow='hidden' wrap>
+    <KFlexBox
+      height='calc(100vh - 75px)'
+      overflow='hidden'
+      wrap
+      overflowY='hidden'
+    >
       {loading && <Loading />}
       {tracksRes.loading && <Loading />}
 
@@ -105,6 +110,7 @@ export default function AdminPanel() {
         style={{
           width: '70%',
           maxHeight: '100%',
+          height: 'auto',
           overflowY: 'scroll',
           display: 'flex',
           alignItems: 'center',
@@ -114,9 +120,6 @@ export default function AdminPanel() {
         }}
       >
         <h2>Your Tracks</h2>
-        <p style={{ fontStyle: 'italic' }}>
-          Please note: On the "Tracks" page these are filtered and sorted.
-        </p>
         {allTracks.map((track) => {
           return (
             <a
