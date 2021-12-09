@@ -4,7 +4,7 @@ const { Kind } = require('graphql/language');
 
 const { Types } = require('mongoose');
 // ex. { $push: { exercises: Types.ObjectId(_id) } },
-const { Track, Admin } = require('../models');
+const { Track, Admin, About } = require('../models');
 
 const { updateDb } = require('../helpers/updateDb');
 const { signToken } = require('../utils/auth');
@@ -20,6 +20,15 @@ const resolvers = {
       const admin = await Admin.findOne({ _id: context.admin._id });
       if (admin) return { isAdmin: true };
       if (!admin) return { isAdmin: false };
+    },
+    getAbout: async (parent, args) => {
+      try {
+        const about = await About.findOne({ code: 123 }, { code: 0 });
+
+        return about;
+      } catch (err) {
+        return err;
+      }
     },
   },
   Mutation: {
@@ -73,7 +82,25 @@ const resolvers = {
 
         return newAdmin;
       } catch (err) {
-        console.error(err);
+        return new Error(err);
+      }
+    },
+    updateAbout: async (parent, { header, body }, context) => {
+      if (!context.admin)
+        return new AuthenticationError('Failed to authenticate current Admin');
+
+      try {
+        const updated = await About.findOneAndUpdate(
+          { code: 123 },
+          { header, body },
+          { new: true, fields: { code: 0 } }
+        );
+
+        if (!updated) return new Error('Failed to update the homepage!');
+
+        return updated;
+      } catch (err) {
+        return new Error(err);
       }
     },
   },

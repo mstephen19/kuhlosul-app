@@ -2,12 +2,19 @@ import React from 'react';
 import profile from '../assets/profile2.jpg';
 import KFlexBox from '../components/Styled/KFlexBox';
 import Header from '../components/Styled/Header';
-import { useGlobalContext } from '../utils/GlobalContext/GlobalProvider';
+import { useQuery } from '@apollo/client';
+import { GET_ABOUT } from '../utils/queries';
+import Loading from '../components/LoadingOverlay/Loading';
 
 export default function Home() {
+  const { loading, data } = useQuery(GET_ABOUT);
+
+  const info = data?.getAbout || {};
+
   return (
     <KFlexBox direction='column' gap='1rem' minHeight='calc(100vh - 75px)'>
-      <Header>I am Kuhlosul</Header>
+      {loading && <Loading />}
+      <Header>{info.header}</Header>
       <KFlexBox width='100%'>
         <KFlexBox width='90%' gap='3rem' wrap>
           <img
@@ -28,16 +35,7 @@ export default function Home() {
               textAlign: 'center',
             }}
           >
-            Hailing from Kelowna B.C. Canada, Kuhlosul is an up-and-coming bass
-            producer who made his musical debut four years ago. Kuhlosul
-            provides his audience with a unique and ghastly take on dubstep,
-            focusing on all things weird and wobbly. Kuhlosul has released music
-            with reputable labels in the past including Emengy, High Caliber
-            Records, and Hybrid Trap. Furthermore, he has garnered support from
-            well-respected artists such as Riot Ten, Minesweepa, Gawm, GlObal,
-            Bassgazm, and more. His persistence and determination have allowed
-            him to perfect his craft and channel his own distinctive sound
-            within his work.
+            {info.body}
           </p>
         </KFlexBox>
       </KFlexBox>
