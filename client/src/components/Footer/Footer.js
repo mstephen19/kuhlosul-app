@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box } from 'rebass';
+import Auth from '../../utils/auth';
 // import Paper from '@mui/material/Paper';
 
 export default function Footer() {
@@ -31,7 +32,10 @@ export default function Footer() {
         <Link to='/contact' style={{ height: '1.5rem', cursor: 'pointer' }}>
           <p style={{ fontSize: '1.5rem', cursor: 'pointer' }}>Contact</p>
         </Link>
-        <Link to='/login' style={{ height: '1.5rem', cursor: 'pointer' }}>
+        <Link
+          to={Auth.loggedIn() ? '/dashboard' : '/login'}
+          style={{ height: '1.5rem', cursor: 'pointer' }}
+        >
           <p style={{ fontSize: '1.5rem', cursor: 'pointer' }}>
             Admin Dashboard
           </p>

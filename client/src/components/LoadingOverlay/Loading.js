@@ -15,7 +15,7 @@ export default function Loading() {
         width: 'auto',
         height: 'auto',
         textAlign: 'center',
-        zIndex: '999',
+        zIndex: '99999',
         background: 'none',
         borderRadius: '10px',
         display: 'flex',
