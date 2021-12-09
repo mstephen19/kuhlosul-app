@@ -19,6 +19,11 @@ const typeDefs = gql`
     publishedAt: Date
   }
 
+  type About {
+    header: String
+    body: String
+  }
+
   type Auth {
     token: ID!
     admin: Admin
@@ -31,6 +36,7 @@ const typeDefs = gql`
   type Query {
     tracks: [Track]
     viewdashboard: AdminCheck
+    getAbout: About
   }
 
   type Mutation {
@@ -38,6 +44,7 @@ const typeDefs = gql`
     seed: [Track]
     changePassword(password: String!): Admin
     createAdmin(email: String!, password: String!): Admin
+    updateAbout(header: String!, body: String!): About
   }
 `;
 

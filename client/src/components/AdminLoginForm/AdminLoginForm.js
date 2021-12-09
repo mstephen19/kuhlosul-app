@@ -5,6 +5,7 @@ import KButton from '../Styled/KButton';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import Loading from '../LoadingOverlay/Loading';
 
 export default function AdminLoginForm() {
   const [formValues, setFormValues] = useState({
@@ -12,7 +13,7 @@ export default function AdminLoginForm() {
     password: '',
   });
   const [disabled, setDisabled] = useState(false);
-  const [login, { error, data }] = useMutation(LOGIN);
+  const [login, { loading, error, data }] = useMutation(LOGIN);
 
   const handleChange = (e) => {
     const newObj = formValues;
@@ -51,13 +52,16 @@ export default function AdminLoginForm() {
       evenly
       onChange={handleChange}
     >
+      {loading && <Loading />}
       <KInput
+        labelColor='white'
         id='email'
         label='Email'
         type='email'
         placeholder='bigboi@example.com'
       />
       <KInput
+        labelColor='white'
         id='password'
         label='Password'
         type='password'

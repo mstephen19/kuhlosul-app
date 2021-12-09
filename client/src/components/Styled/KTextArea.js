@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input, Label } from '@rebass/forms';
+import { Textarea, Label } from '@rebass/forms';
 import { Box } from 'rebass';
 
-export default function KInput({
+export default function KTextArea({
   id,
   label,
   labelColor,
@@ -17,12 +17,12 @@ export default function KInput({
       <Label htmlFor={id} style={{ color: labelColor, fontStyle: 'italic' }}>
         {label}
       </Label>
-      <Input
+      <Textarea
         id={id}
         name={type}
         type={type}
         placeholder={placeholder}
-        style={{ color: color }}
+        style={{ color: color, height: '' }}
         onChange={onChange}
         {...props}
       />

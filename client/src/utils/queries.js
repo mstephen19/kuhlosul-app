@@ -19,4 +19,13 @@ export const GET_TRACKS = gql`
       genre
     }
   }
-`
+`;
+
+export const GET_ABOUT = gql`
+  query getAbout {
+    getAbout {
+      header
+      body
+    }
+  }
+`;

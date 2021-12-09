@@ -1,7 +1,8 @@
 import React from 'react';
+import logo from '../../assets/vikingLogo.png';
+import './loading.css';
 
-export default function Loading({ text }) {
-  const info = text || 'Loading...';
+export default function Loading() {
   return (
     <div
       style={{
@@ -11,18 +12,23 @@ export default function Loading({ text }) {
         color: 'black',
         transform: 'translate(-50%, -50%)',
         fontSize: '2rem',
-        width: '200px',
-        height: '100px',
+        width: 'auto',
+        height: 'auto',
         textAlign: 'center',
-        zIndex: '999',
-        background: 'white',
+        zIndex: '99999',
+        background: 'none',
         borderRadius: '10px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
       }}
     >
-      {info}
+      <img
+        className='loadingLogo'
+        src={logo}
+        alt='Loading'
+        style={{ width: 'clamp(150px, 25vw, 300px)' }}
+      />
     </div>
   );
 }

@@ -69,6 +69,8 @@ export default function NewAdminModal(props) {
       </Modal.Header>
       <Modal.Body>
         <KInput
+          labelColor='black'
+          label='Email'
           id='email'
           name='email'
           type='email'
@@ -77,6 +79,8 @@ export default function NewAdminModal(props) {
           color='black'
         />
         <KInput
+          labelColor='black'
+          label='Password'
           id='password'
           name='password'
           type='password'
@@ -85,6 +89,8 @@ export default function NewAdminModal(props) {
           color='black'
         />
         <KInput
+          labelColor='black'
+          label='Password Confirm'
           id='passwordConfirm'
           name='passwordConfirm'
           type='password'
