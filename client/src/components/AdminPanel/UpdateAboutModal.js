@@ -5,7 +5,8 @@ import KTextArea from '../Styled/KTextArea';
 import Loading from '../LoadingOverlay/Loading';
 import { Modal, Button } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ABOUT } from '../../utils/queries';
+import { GET_ABOUT, VIEW_DASHBOARD } from '../../utils/queries';
+import { UPDATE_ABOUT } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 export default function UpdateAboutModal({ ...props }) {
@@ -14,6 +15,28 @@ export default function UpdateAboutModal({ ...props }) {
     body: '',
   });
   const query = useQuery(GET_ABOUT);
+  const adminCheck = useQuery(VIEW_DASHBOARD);
+  const [sendAboutData, { data, loading, error }] = useMutation(UPDATE_ABOUT, {
+    update(cache, { data: { updateAbout } }) {
+      try {
+        const { getAbout } = cache.readQuery({ query: GET_ABOUT });
+
+        cache.writeQuery({
+          query: GET_ABOUT,
+          data: {
+            getAbout: {
+              ...getAbout,
+              body: updateAbout.body,
+              header: updateAbout.header,
+            },
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  });
+  const isAdmin = adminCheck.data?.viewdashboard?.isAdmin || false;
 
   useEffect(() => {
     const obj = query.data?.getAbout || {};
@@ -28,8 +51,24 @@ export default function UpdateAboutModal({ ...props }) {
     setFormValues(currentState);
   };
 
-  const handleSubmit = () => {
-    console.log(formValues);
+  const handleSubmit = async () => {
+    if (!Auth.loggedIn() || !isAdmin)
+      return alert(
+        'Authentication error. Try logging out then logging in again.'
+      );
+    try {
+      const { data } = await sendAboutData({
+        variables: {
+          ...formValues,
+        },
+      });
+
+      if (!data) return;
+
+      return alert('Success!');
+    } catch (err) {
+      alert('Request error.');
+    }
   };
 
   return (
@@ -69,12 +108,14 @@ export default function UpdateAboutModal({ ...props }) {
           defaultValue={formValues.body}
         />
         <KButton disabled={false} text='Submit' onClick={handleSubmit} />
-        {query.error && <p style={{ color: 'red' }}>There was an error</p>}
+        {query.error || isAdmin.error ? (
+          <p style={{ color: 'red' }}>There was an error somewhere.</p>
+        ) : null}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>
       </Modal.Footer>
-      {query.loading && <Loading />}
+      {query.loading || isAdmin.loading ? <Loading /> : null}
     </Modal>
   );
 }

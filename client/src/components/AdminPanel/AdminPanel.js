@@ -185,10 +185,12 @@ export default function AdminPanel() {
         onHide={() => setAdminModalShow(false)}
       />
 
-      <UpdateAboutModal
-        show={updateModalShow}
-        onHide={() => setUpdateModalShow(false)}
-      />
+      {updateModalShow === true && (
+        <UpdateAboutModal
+          show={updateModalShow}
+          onHide={() => setUpdateModalShow(false)}
+        />
+      )}
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>

@@ -37,3 +37,12 @@ export const CREATE_ADMIN = gql`
     }
   }
 `;
+
+export const UPDATE_ABOUT = gql`
+  mutation updateAbout($header: String!, $body: String!) {
+    updateAbout(header: $header, body: $body) {
+      header
+      body
+    }
+  }
+`;
