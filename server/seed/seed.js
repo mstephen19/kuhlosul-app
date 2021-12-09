@@ -19,6 +19,8 @@ mongoose.connect(
 
 (async function () {
   try {
+    await Admin.deleteMany({});
+    await Track.deleteMany({});
     const added = await updateDb();
     console.log('Updated Tracks!');
     console.log(added);

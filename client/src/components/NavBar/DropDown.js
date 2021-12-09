@@ -74,7 +74,7 @@ export default function DropDown({ position, onClick }) {
               <li
                 id={link.name}
                 style={{
-                  background: currentPage === link.name ? '#303134' : 'none',
+                  background: currentPage === link.name && '#303134',
                 }}
               >
                 {link.name}
