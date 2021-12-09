@@ -9,6 +9,8 @@ const { Track, Admin, About } = require('../models');
 const { updateDb } = require('../helpers/updateDb');
 const { signToken } = require('../utils/auth');
 
+require('dotenv').config();
+
 const resolvers = {
   Query: {
     tracks: async () => {
