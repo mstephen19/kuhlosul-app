@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import { Box } from 'rebass';
 import Icon from './Icon';
 import DropDown from './DropDown';

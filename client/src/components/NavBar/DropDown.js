@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import './dropdown.css';
 import { Link } from 'react-router-dom';
 import { uuid } from 'uuidv4';
@@ -17,6 +17,10 @@ export default function DropDown({ position, onClick }) {
       payload: target.id,
     });
   };
+
+  useEffect(() => {
+    document.title = `Kuhlosul - ${currentPage}`;
+  }, [currentPage]);
 
   const links = [
     {

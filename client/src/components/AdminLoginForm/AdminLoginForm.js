@@ -13,7 +13,7 @@ export default function AdminLoginForm() {
     password: '',
   });
   const [disabled, setDisabled] = useState(false);
-  const [login, { loading, error, data }] = useMutation(LOGIN);
+  const [login, { loading }] = useMutation(LOGIN);
 
   const handleChange = (e) => {
     const newObj = formValues;
@@ -26,7 +26,6 @@ export default function AdminLoginForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formValues);
     try {
       const { data } = await login({
         variables: { ...formValues },
@@ -39,7 +38,6 @@ export default function AdminLoginForm() {
         password: '',
       });
     } catch (err) {
-      console.log(err);
       alert('There was an error logging in');
     }
   };

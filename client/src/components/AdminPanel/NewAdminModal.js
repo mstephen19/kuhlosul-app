@@ -14,7 +14,7 @@ export default function NewAdminModal(props) {
     password: '',
   });
 
-  const [createAdmin, { loading, data, error }] = useMutation(CREATE_ADMIN);
+  const [createAdmin, { loading, error }] = useMutation(CREATE_ADMIN);
 
   const handleSecond = ({ target: { value } }) => {
     setPwConfirm(value);

@@ -8,8 +8,7 @@ import Loading from '../LoadingOverlay/Loading';
 import Auth from '../../utils/auth';
 
 export default function PasswordModal(props) {
-  const [changePassword, { loading, error, data }] =
-    useMutation(CHANGE_PASSWORD);
+  const [changePassword, { loading, error }] = useMutation(CHANGE_PASSWORD);
   const [showPw, toggleShowPw] = useState(false);
   const [password, setPassword] = useState('');
 

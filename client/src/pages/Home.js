@@ -7,6 +7,7 @@ import { GET_ABOUT } from '../utils/queries';
 import Loading from '../components/LoadingOverlay/Loading';
 
 export default function Home() {
+
   const { loading, data } = useQuery(GET_ABOUT);
 
   const info = data?.getAbout || {};

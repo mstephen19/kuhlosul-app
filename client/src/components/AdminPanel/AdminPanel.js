@@ -13,7 +13,7 @@ import UpdateAboutModal from './UpdateAboutModal';
 
 // Later on below the update database button, have a list of all tracks currently in the db
 export default function AdminPanel() {
-  const [seed, { error, loading, data }] = useMutation(SEED_DATABASE);
+  const [seed, { loading }] = useMutation(SEED_DATABASE);
   const tracksRes = useQuery(GET_TRACKS);
   const [modalShow, setModalShow] = useState(false);
   const [adminModalShow, setAdminModalShow] = useState(false);
@@ -44,7 +44,6 @@ export default function AdminPanel() {
       setShow(false);
       const { data } = await seed();
       if (!data) return alert('Failed to update database');
-      console.log(data);
       return alert('Database will be updated in the background.');
     } catch (err) {
       alert('Failed to update database.');

@@ -69,8 +69,6 @@ export default function ContactForm() {
     }
   };
 
-  console.log(formValues);
-
   return (
     <KFlexBox
       width='50%'
