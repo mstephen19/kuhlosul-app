@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import KFlexBox from '../Styled/KFlexBox';
 import KInput from '../Styled/KInput';
 import KTextArea from '../Styled/KTextArea';
@@ -8,18 +8,23 @@ import Loading from '../LoadingOverlay/Loading';
 import { useMutation } from '@apollo/client';
 import { SEND_MESSAGE } from '../../utils/mutations';
 import { validateEmail } from '../../utils/validate';
+import sendLimit from '../../utils/validate';
 
 export default function ContactForm() {
   const [formValues, setFormValues] = useState({
     email: '',
-    type: 'General Inquiries',
+    type: '',
     subject: '',
     body: '',
   });
   const [err, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
 
-  const [sendMessage, { loading, error, data }] = useMutation(SEND_MESSAGE);
+  const [sendMessage, { loading }] = useMutation(SEND_MESSAGE);
+
+  useEffect(() => {
+    loading ? setDisabled(true) : setDisabled(false);
+  }, [loading]);
 
   const handleChange = ({ target }) => {
     const currentState = formValues;
@@ -35,6 +40,8 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!sendLimit.canSend())
+      return setError('Can only send a message once per day.');
     if (!validateEmail(formValues.email)) return setError('Email not valid.');
     if (formValues.body.length < 10) return setError('Message body too short.');
     try {
@@ -48,11 +55,21 @@ export default function ContactForm() {
 
       if (!data.sendMessage.status) return setError('Message failed to send.');
 
+      setFormValues({
+        email: '',
+        type: '',
+        subject: '',
+        body: '',
+      });
+
+      sendLimit.saveSentTime();
       return alert("Message sent. I'll get bat to you as soon as I can!");
     } catch (err) {
       return setError('Error sending message.');
     }
   };
+
+  console.log(formValues);
 
   return (
     <KFlexBox
@@ -76,7 +93,11 @@ export default function ContactForm() {
         name='type'
         label='Type'
         labelColor='white'
-        options={['General Inquiries', 'Promos']}
+        options={
+          formValues.type === 'Promos'
+            ? ['Promos', 'General Inquiries']
+            : ['General Inquiries', 'Promos']
+        }
       />
       <KInput
         labelColor='white'
