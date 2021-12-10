@@ -3,6 +3,8 @@ import { Box } from 'rebass';
 import Icon from './Icon';
 import DropDown from './DropDown';
 import logoWhite from '../../assets/logowhite.png';
+import { Link } from 'react-router-dom';
+import './navlogo.css';
 
 export default function Nav() {
   const [dropdown, toggleDropdown] = useState(false);
@@ -32,22 +34,32 @@ export default function Nav() {
           animated={dropdown ? true : false}
         />
         <div style={{ width: 'calc(100vw - 70px)' }}>
-          <div
-            style={{
-              height: '50px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              overflow: 'hidden',
-              marginRight: '70px',
-            }}
-          >
-            <img
-              src={logoWhite}
-              alt='Logo'
-              style={{ objectFit: 'cover', height: '500%' }}
-            />
-          </div>
+          <Link to='/' style={{ cursor: 'default' }}>
+            <div
+              style={{
+                height: '50px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflow: 'hidden',
+                marginRight: '70px',
+                pointerEvents: 'none',
+                cursor: 'default',
+              }}
+            >
+              <img
+                className='navLogo'
+                src={logoWhite}
+                alt='Logo'
+                style={{
+                  objectFit: 'cover',
+                  height: '500%',
+                  cursor: 'pointer',
+                  pointerEvents: 'initial',
+                }}
+              />
+            </div>
+          </Link>
         </div>
       </Box>
       <DropDown position={dropdown ? 'down' : 'up'} onClick={handleClick} />

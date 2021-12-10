@@ -2,6 +2,8 @@ const { AuthenticationError } = require('apollo-server-express');
 const { GraphQLScalarType } = require('graphql');
 const { Kind } = require('graphql/language');
 
+const util = require('util');
+
 const { Types } = require('mongoose');
 // ex. { $push: { exercises: Types.ObjectId(_id) } },
 const { Track, Admin, About } = require('../models');
@@ -9,6 +11,7 @@ const { Track, Admin, About } = require('../models');
 const { updateDb } = require('../helpers/updateDb');
 const { signToken } = require('../utils/auth');
 
+const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const resolvers = {
@@ -103,6 +106,56 @@ const resolvers = {
         return updated;
       } catch (err) {
         return new Error(err);
+      }
+    },
+    sendMessage: async (parent, { email, type, subject, body }) => {
+      try {
+        const to =
+          type === 'Promos' ? process.env.PROMO_EMAIL : process.env.MAIN_EMAIL;
+        const em = process.env.EMAIL;
+        const pw = process.env.PASSWORD;
+
+        const transporter = nodemailer.createTransport({
+          host: 'smtp-mail.outlook.com',
+          secureConnection: false,
+          port: 587,
+          requireTLS: true,
+          tls: {
+            ciphers: 'SSLv3',
+          },
+          auth: {
+            user: em,
+            pass: pw,
+          },
+        });
+
+        const mailOptions = {
+          from: em,
+          to: to,
+          subject: `Message from ${email}: ${subject}`,
+          text: `${body}`,
+        };
+
+        const status = await new Promise((resolve, reject) => {
+          let status;
+          transporter.sendMail(mailOptions, (err, result) => {
+            transporter.close();
+            if (err) {
+              console.log(err);
+              status = false;
+              reject(err);
+            }
+            if (result) {
+              console.log(result);
+              status = true;
+              resolve(status);
+            }
+          });
+        });
+
+        return { status };
+      } catch (err) {
+        return err;
       }
     },
   },

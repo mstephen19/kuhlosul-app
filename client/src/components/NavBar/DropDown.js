@@ -57,6 +57,7 @@ export default function DropDown({ position, onClick }) {
           fontSize: '2rem',
           width: '100%',
           margin: '0',
+          marginTop: '10px',
           padding: '0',
           textAlign: 'center',
         }}

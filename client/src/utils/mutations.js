@@ -46,3 +46,16 @@ export const UPDATE_ABOUT = gql`
     }
   }
 `;
+
+export const SEND_MESSAGE = gql`
+  mutation sendMessage(
+    $email: String!
+    $type: String!
+    $subject: String!
+    $body: String!
+  ) {
+    sendMessage(email: $email, type: $type, subject: $subject, body: $body) {
+      status
+    }
+  }
+`;

@@ -65,6 +65,7 @@ export default function UpdateAboutModal({ ...props }) {
 
       if (!data) return;
 
+      props.onHide();
       return alert('Success!');
     } catch (err) {
       alert('Request error.');
@@ -104,7 +105,7 @@ export default function UpdateAboutModal({ ...props }) {
           placeholder='I am a cool guy!'
           onChange={(e) => handleFormValues(e)}
           color='black'
-          style={{ color: 'black' }}
+          style={{ color: 'black', minHeight: '300px' }}
           defaultValue={formValues.body}
         />
         <KButton disabled={false} text='Submit' onClick={handleSubmit} />

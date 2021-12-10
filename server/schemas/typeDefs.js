@@ -19,6 +19,13 @@ const typeDefs = gql`
     publishedAt: Date
   }
 
+  type EmailForm {
+    email: String
+    type: String
+    subject: String
+    body: String
+  }
+
   type About {
     header: String
     body: String
@@ -33,6 +40,10 @@ const typeDefs = gql`
     isAdmin: Boolean!
   }
 
+  type Status {
+    status: Boolean!
+  }
+
   type Query {
     tracks: [Track]
     viewdashboard: AdminCheck
@@ -45,6 +56,12 @@ const typeDefs = gql`
     changePassword(password: String!): Admin
     createAdmin(email: String!, password: String!): Admin
     updateAbout(header: String!, body: String!): About
+    sendMessage(
+      email: String!
+      type: String!
+      subject: String!
+      body: String!
+    ): Status
   }
 `;
 

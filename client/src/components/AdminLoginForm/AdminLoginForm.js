@@ -18,7 +18,7 @@ export default function AdminLoginForm() {
   const handleChange = (e) => {
     const newObj = formValues;
     newObj[e.target.id] = e.target.value;
-    newObj.email.length > 0 && newObj.email.length > 0
+    newObj.email.length > 0 && newObj.password.length > 0
       ? setDisabled(false)
       : setDisabled(true);
     setFormValues(newObj);
