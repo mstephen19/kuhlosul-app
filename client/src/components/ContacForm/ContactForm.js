@@ -63,6 +63,7 @@ export default function ContactForm() {
       });
 
       sendLimit.saveSentTime();
+      window.location.reload();
       return alert("Message sent. I'll get bat to you as soon as I can!");
     } catch (err) {
       return setError('Error sending message.');
@@ -78,7 +79,11 @@ export default function ContactForm() {
       onChange={handleChange}
     >
       {loading && <Loading />}
-      {err && <p style={{ color: 'red', fontSize: '2rem' }}>{err}</p>}
+      {err && (
+        <p style={{ color: 'red', fontSize: '2rem', textAlign: 'center' }}>
+          {err}
+        </p>
+      )}
       <KInput
         labelColor='white'
         id='email'
