@@ -44,7 +44,7 @@ export default function AdminLoginForm() {
 
   return (
     <KFlexBox
-      width='50%'
+      width='75%'
       height='300px'
       direction='column'
       evenly

@@ -13,7 +13,7 @@ export default function KTextArea({
   ...props
 }) {
   return (
-    <Box style={{ width: '100%', minWidth: '200px' }}>
+    <Box style={{ width: '100%', minWidth: '200px', maxWidth: '1000px' }}>
       <Label htmlFor={id} style={{ color: labelColor, fontStyle: 'italic' }}>
         {label}
       </Label>

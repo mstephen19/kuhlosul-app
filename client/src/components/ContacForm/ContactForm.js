@@ -71,7 +71,7 @@ export default function ContactForm() {
 
   return (
     <KFlexBox
-      width='50%'
+      width='75%'
       height='auto'
       direction='column'
       evenly
