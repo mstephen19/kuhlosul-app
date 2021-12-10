@@ -1,6 +1,7 @@
 {
   "short_name": "Kuhlosul",
   "name": "Kuhlosul Official Artist Page",
+  "description": "The official web-app of Kuhlosul",
   "icons": [
     {
       "src": "favicon.ico",
@@ -21,5 +22,10 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#303134",
-  "background_color": "#121212"
+  "background_color": "#121212",
+  "related_applications": [
+    {
+      "platform": "web"
+    }
+  ]
 }

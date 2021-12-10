@@ -49,8 +49,22 @@ export default function Footer() {
             cursor: 'pointer',
           }}
         >
-          Created with ❤️ by
-          <a href='https://github.com/mstephen19'> Matt Stephens</a>
+          Created with&nbsp;
+          <a
+            href='https://github.com/mstephen19/kuhlosul-app'
+            target='_blank'
+            rel='noreferrer'
+          >
+            ❤️&nbsp;
+          </a>
+          by&nbsp;
+          <a
+            href='https://mstephen19.github.io/my-portfolio'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Matt Stephens
+          </a>
         </p>
       </div>
     </Box>
