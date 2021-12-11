@@ -58,9 +58,10 @@ export default function Nav() {
                 alt='Logo'
                 style={{
                   objectFit: 'cover',
-                  height: '500%',
+                  maxHeight: '500%',
                   cursor: 'pointer',
                   pointerEvents: 'initial',
+                  width: 'clamp(200px, 20vw, 500px)',
                 }}
               />
             </div>

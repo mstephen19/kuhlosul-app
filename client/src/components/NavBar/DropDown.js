@@ -8,8 +8,6 @@ import { SET_CURRENT_PAGE } from '../../utils/GlobalContext/actions';
 export default function DropDown({ position, onClick }) {
   const { currentPage, dispatch } = useGlobalContext();
 
-  console.log(currentPage);
-
   const handleItemClick = ({ target }) => {
     if (target.id !== currentPage) window.scrollTo(0, 0);
     dispatch({
