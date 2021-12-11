@@ -36,14 +36,14 @@ const rateLimiter = new RateLimit({
     errorHandler: console.error.bind(null, 'rate-limit-mongo'),
     statusCode: 429,
   }),
-  max: 100,
+  max: 1000,
   windowMs: 15 * 60 * 1000,
 });
 
 const speedLimiter = SpeedLimit({
   windowMs: 15 * 60 * 1000,
-  delayAfter: 50,
-  delayMs: 500,
+  delayAfter: 500,
+  delayMs: 400,
 });
 
 app.enable('trust proxy');
