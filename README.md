@@ -13,6 +13,7 @@ The official artist page for my best friend and upcoming producer [Kuhlosul](htt
 - [Custom ScScraper Library](#scscraper)
 - [Mongoose Models](#models)
 - [updateDb Function](#update-db)
+- [GraphQL Mutations and Queries](#graphql)
 <!-- - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license) -->
@@ -153,3 +154,33 @@ const runUpdate = async() => {
 ```
 
 Within the server.js file, this function is set on a setInterval. It automatically runs in the background every 12 hours to ensure the database is always up-to-date.
+
+<h2 id='graphql'>GraphQL Mutations and Queries</h2>
+<hr>
+
+This application uses GraphQL entirely. I did create a 'routes' folder when initially creating the project, as I was considering having a hybrid of RESTful routes and GraphQL routes; however, I decided that would become messy and difficult to maintain.
+
+There are 3 main queries, and 6 main mutations at the moment. This number will increase as updates roll out:
+
+```GraphQL
+  type Query {
+    tracks: [Track]
+    viewdashboard: AdminCheck
+    getAbout: About
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    seed: [Track]
+    changePassword(password: String!): Admin
+    createAdmin(email: String!, password: String!): Admin
+    updateAbout(header: String!, body: String!): About
+    sendMessage(
+      email: String!
+      type: String!
+      subject: String!
+      body: String!
+    ): Status
+  }
+```
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import profile from '../assets/profile2.jpg';
+import profile from '../assets/profile2.webp';
 import KFlexBox from '../components/Styled/KFlexBox';
 import Header from '../components/Styled/Header';
 import { useQuery } from '@apollo/client';

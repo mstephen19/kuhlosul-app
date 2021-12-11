@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box } from 'rebass';
 import Icon from './Icon';
 import DropDown from './DropDown';
-import logoWhite from '../../assets/logowhite.png';
+import logoWhite from '../../assets/logowhite.webp';
 import { Link } from 'react-router-dom';
 import './navlogo.css';
 
