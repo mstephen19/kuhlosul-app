@@ -55,6 +55,7 @@ const resolvers = {
       return tracks;
     },
     login: async (parent, { email, password }) => {
+      email = email.toLowerCase()
       const admin = await Admin.findOne({ email });
 
       if (!admin) return new Error('No admin with this email found!');
