@@ -1,6 +1,6 @@
 # Kuhlosul App
 
-The official artist page for my best friend and upcoming producer [Kuhlosul](https://soundcloud.com/k_dubs). This PWA includes a standard "About" page, a "Tracks" page, and a "Contact" page. There is also an admin panel which allows admins to complete various tasks such as editing the content on the About page, and updating the database with Kuhlosul's latest tracks (pulled from SoundCloud).
+The official artist page for my best friend and upcoming DJ/producer [Kuhlosul](https://soundcloud.com/k_dubs). This MERNG PWA includes a standard "About" page, a "Tracks" page, and a "Contact" page. There is also an admin panel which allows admins to complete various tasks such as editing the content on the About page, and updating the database with Kuhlosul's latest tracks (pulled from SoundCloud).
 
 ![Image](./assets/kuhlosulAppDemo.gif)
 
@@ -14,6 +14,7 @@ The official artist page for my best friend and upcoming producer [Kuhlosul](htt
 - [Mongoose Models](#models)
 - [updateDb Function](#update-db)
 - [GraphQL Mutations and Queries](#graphql)
+- [JWT](#jwt)
 <!-- - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license) -->
@@ -162,7 +163,7 @@ This application uses GraphQL entirely. I did create a 'routes' folder when init
 
 There are 3 main queries, and 6 main mutations at the moment. This number will increase as updates roll out:
 
-```GraphQL
+```JavaScript
   type Query {
     tracks: [Track]
     viewdashboard: AdminCheck
@@ -183,4 +184,87 @@ There are 3 main queries, and 6 main mutations at the moment. This number will i
     ): Status
   }
 ```
+
+The 'seed' mutation is the one which is used to manually run the [updateDb function](#update-db) from the admin dashboard:
+
+![Image](./assets/adminFunctions.png)
+
+<h2 id='jwt'>JWT</h2>
+<hr>
+
+### Server-Side
+
+Two methods are used within the auth.js file of the server's utils folder in order to handle server-side authentication:
+
+1. signToken
+
+This method takes in an 'Admin' object from our database, creates and signs a new token, and returns an object including the '\_id', 'email', and the newly created web token. Because there is no ability for users to create accounts (except for admins creating new admin accounts), this method is only used in one place - the 'login' mutation resolver:
+
+```JavaScript
+    login: async (parent, { email, password }) => {
+      email = email.toLowerCase()
+      // grab the admin corresponding to the email sent in the request
+      const admin = await Admin.findOne({ email });
+
+      if (!admin) return new Error('No admin with this email found!');
+
+      // verify if the password is correct using custom Mongoose hook utilizing bcrypt
+      const correctPass = await admin.checkPassword(password);
+
+      if (!correctPass) return new AuthenticationError('Incorrect passoword!');
+
+      // create the 'Auth' object by passing our admin object into the signToken function
+      const token = signToken(admin);
+
+      // return the token object and the admin object
+      return { token, admin };
+    },
+```
+
+In order to accommodate for the return of this resolver, it was necessary to create an 'Auth' type within my GraphQL typeDefs:
+
+```JavaScript
+  type Auth {
+    token: ID!
+    admin: Admin
+  }
+```
+
+The token is set up to expire after 24 hours.
+
+2. authMiddleware
+
+The authMiddleware method allows us to receive our token initially signed with signToken from the client. I decided to make it very flexible when writing it, and set it up to where the token can be placed in the request's body, query, or headers. Eventually I placed it in the headers.
+
+After being pulled from the request, the JWT is then verified, and the decoded data is added to the request object to be used within our GraphQL context.
+
+Adding the authMiddleware function to the ApolloServer:
+
+```JavaScript
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: authMiddleware,
+});
+```
+
+Using the context within a resolver:
+
+```JavaScript
+    changePassword: async (parent, { password }, context) => {
+      // if no admin object within context, return custom error
+      if (!context.admin)
+        return new AuthenticationError('Failed to authenticate Admin');
+
+      // find the admin with the context.admin's _id and change the password
+      const withNewPassword = await Admin.findOneAndUpdate(
+        { _id: context.admin._id },
+        { password: password },
+        { new: true }
+      );
+      return withNewPassword;
+    },
+```
+
+### Client-Side
 

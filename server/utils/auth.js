@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'superDuperSecret';
+const secret = process.env.AUTH_SECRET;
 const expiration = '24h';
 
 module.exports = {
