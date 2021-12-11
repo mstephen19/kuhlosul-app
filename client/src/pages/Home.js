@@ -7,7 +7,6 @@ import { GET_ABOUT } from '../utils/queries';
 import Loading from '../components/LoadingOverlay/Loading';
 
 export default function Home() {
-
   const { loading, data } = useQuery(GET_ABOUT);
 
   const info = data?.getAbout || {};
@@ -23,7 +22,8 @@ export default function Home() {
               borderRadius: '100%',
               width: 'clamp(80%, 50%, 500px)',
               maxWidth: '500px',
-              boxShadow: '-10px 10px 0px white',
+              boxShadow: '-10px 5px 0px white',
+              margin: '3px',
             }}
             src={profile}
             alt='Kuhlosul Profile'

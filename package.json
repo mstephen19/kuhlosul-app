@@ -24,6 +24,7 @@
   "homepage": "https://github.com/mstephen19/soundcloud-scraper#readme",
   "dependencies": {
     "concurrently": "^6.4.0",
+    "express-slow-down": "^1.4.0",
     "react-intersection-observer-lazy-load": "^1.0.2"
   }
 }

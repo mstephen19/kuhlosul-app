@@ -18,14 +18,18 @@
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
     "cheerio": "^1.0.0-rc.10",
+    "compression": "^1.7.4",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.5.1",
     "graphql": "^16.0.1",
+    "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.6",
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.2",
     "puppeteer": "^11.0.0",
+    "rate-limit-mongo": "^2.3.2",
     "soundcloud-scraper": "^5.0.2"
   },
   "devDependencies": {
