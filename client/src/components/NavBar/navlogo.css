@@ -2,6 +2,8 @@
   transition: all 0.2s ease-in-out;
 }
 
-.navLogo:hover {
-  transform: scale(1.1);
+@media (hover: hover) {
+  .navLogo:hover {
+    transform: scale(1.1);
+  }
 }

@@ -32,18 +32,18 @@ const server = new ApolloServer({
 const rateLimiter = new RateLimit({
   store: new MongoStore({
     uri: process.env.MONGODB_URI || 'mongodb://localhost/masondb',
-    expireTimeMs: 15 * 60 * 1000,
+    expireTimeMs: 10 * 60 * 1000,
     errorHandler: console.error.bind(null, 'rate-limit-mongo'),
     statusCode: 429,
   }),
   max: 1000,
-  windowMs: 15 * 60 * 1000,
+  windowMs: 10 * 60 * 1000,
 });
 
 const speedLimiter = SpeedLimit({
-  windowMs: 15 * 60 * 1000,
-  delayAfter: 500,
-  delayMs: 400,
+  windowMs: 10 * 60 * 1000,
+  delayAfter: 600,
+  delayMs: 300,
 });
 
 app.enable('trust proxy');

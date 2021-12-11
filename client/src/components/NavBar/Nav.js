@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { Box } from 'rebass';
 import Icon from './Icon';
 import DropDown from './DropDown';
-import logoWhite from '../../assets/logowhite.png';
+import logoWhite from '../../assets/logowhite.webp';
 import { Link } from 'react-router-dom';
 import './navlogo.css';
+// import { useGlobalContext } from '../../utils/GlobalContext/GlobalProvider';
 
 export default function Nav() {
+  // const { currentPage } = useGlobalContext();
+
+  // console.log(currentPage);
+
   const [dropdown, toggleDropdown] = useState(false);
 
   const handleClick = () => {
@@ -53,9 +58,10 @@ export default function Nav() {
                 alt='Logo'
                 style={{
                   objectFit: 'cover',
-                  height: '500%',
+                  maxHeight: '500%',
                   cursor: 'pointer',
                   pointerEvents: 'initial',
+                  width: 'clamp(200px, 20vw, 500px)',
                 }}
               />
             </div>
