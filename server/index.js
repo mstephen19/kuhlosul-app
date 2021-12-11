@@ -51,7 +51,13 @@ app.enable('trust proxy');
 app.use(rateLimiter);
 app.use(speedLimiter);
 
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: false,
+//   })
+// );
 app.use(helmet());
+
 app.use(logger('dev'));
 app.use(compression());
 
