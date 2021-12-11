@@ -12,6 +12,7 @@ export default function DropDown({ position, onClick }) {
   const [{ currentPage }, dispatch] = useReducer(reducer, initialState);
 
   const handleItemClick = ({ target }) => {
+    if (target.id !== currentPage) window.scrollTo(0, 0);
     dispatch({
       type: SET_CURRENT_PAGE,
       payload: target.id,

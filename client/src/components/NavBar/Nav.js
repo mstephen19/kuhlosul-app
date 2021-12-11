@@ -5,8 +5,13 @@ import DropDown from './DropDown';
 import logoWhite from '../../assets/logowhite.webp';
 import { Link } from 'react-router-dom';
 import './navlogo.css';
+// import { useGlobalContext } from '../../utils/GlobalContext/GlobalProvider';
 
 export default function Nav() {
+  // const { currentPage } = useGlobalContext();
+
+  // console.log(currentPage);
+
   const [dropdown, toggleDropdown] = useState(false);
 
   const handleClick = () => {
