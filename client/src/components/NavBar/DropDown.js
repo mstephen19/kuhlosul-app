@@ -1,15 +1,14 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './dropdown.css';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { useGlobalContext } from '../../utils/GlobalContext/GlobalProvider';
 import { SET_CURRENT_PAGE } from '../../utils/GlobalContext/actions';
-import { reducer } from '../../utils/GlobalContext/reducers';
 
 export default function DropDown({ position, onClick }) {
-  const initialState = useGlobalContext();
+  const { currentPage, dispatch } = useGlobalContext();
 
-  const [{ currentPage }, dispatch] = useReducer(reducer, initialState);
+  console.log(currentPage);
 
   const handleItemClick = ({ target }) => {
     if (target.id !== currentPage) window.scrollTo(0, 0);
