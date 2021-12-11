@@ -6,6 +6,7 @@ const compression = require('compression');
 const helmet = require('helmet');
 const RateLimit = require('express-rate-limit');
 const MongoStore = require('rate-limit-mongo');
+const SpeedLimit = require('express-slow-down');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
@@ -28,17 +29,27 @@ const server = new ApolloServer({
   server.applyMiddleware({ app });
 })();
 
-const limiter = new RateLimit({
+const rateLimiter = new RateLimit({
   store: new MongoStore({
     uri: process.env.MONGODB_URI || 'mongodb://localhost/masondb',
     expireTimeMs: 15 * 60 * 1000,
     errorHandler: console.error.bind(null, 'rate-limit-mongo'),
+    statusCode: 429,
   }),
-  max: 50,
+  max: 100,
   windowMs: 15 * 60 * 1000,
 });
 
-app.use(limiter);
+const speedLimiter = SpeedLimit({
+  windowMs: 15 * 60 * 1000,
+  delayAfter: 50,
+  delayMs: 500,
+});
+
+app.enable('trust proxy');
+
+app.use(rateLimiter);
+app.use(speedLimiter);
 
 app.use(helmet());
 app.use(logger('dev'));
