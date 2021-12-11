@@ -2,6 +2,8 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const logger = require('morgan');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
@@ -24,7 +26,9 @@ const server = new ApolloServer({
   server.applyMiddleware({ app });
 })();
 
+app.use(helmet());
 app.use(logger('dev'));
+app.use(compression());
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
