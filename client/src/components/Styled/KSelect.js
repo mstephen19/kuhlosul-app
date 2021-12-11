@@ -1,7 +1,7 @@
 import React from 'react';
 import { Select, Label } from '@rebass/forms';
 import { Box } from 'rebass';
-import { uuid } from 'uuidv4';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function KSelect({
   options,
@@ -26,7 +26,7 @@ export default function KSelect({
         {...props}
       >
         {options.map((option) => {
-          return <option key={uuid()}>{option}</option>;
+          return <option key={uuidv4()}>{option}</option>;
         })}
       </Select>
     </Box>

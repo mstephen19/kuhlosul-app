@@ -151,3 +151,5 @@ const runUpdate = async() => {
   return added; // Returns a Tracks.find({})
 };
 ```
+
+Within the server.js file, this function is set on a setInterval. It automatically runs in the background every 12 hours to ensure the database is always up-to-date.
