@@ -22,10 +22,5 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#303134",
-  "background_color": "#121212",
-  "related_applications": [
-    {
-      "platform": "web"
-    }
-  ]
+  "background_color": "#121212"
 }

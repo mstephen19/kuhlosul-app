@@ -18,6 +18,22 @@ export default function DropDown({ position, onClick }) {
     });
   };
 
+  const handleMerch = (e) => {
+    e.preventDefault();
+    window.open(
+      e.target.getAttribute('data-href'),
+      'targetWindow',
+      `toolbar=no,
+     location=no,
+     status=no,
+     menubar=no,
+     scrollbars=yes,
+     resizable=yes,
+     width=500px,
+     height=700px`
+    );
+  };
+
   useEffect(() => {
     document.title = `Kuhlosul - ${currentPage}`;
   }, [currentPage]);
@@ -89,11 +105,14 @@ export default function DropDown({ position, onClick }) {
         })}
         <a
           href='https://kuhlosulmerch.bigcartel.com'
-          onClick={onClick}
+          onClick={(e) => {
+            handleMerch(e);
+            onClick();
+          }}
           target='_blank'
           rel='noreferrer'
         >
-          <li>Merch</li>
+          <li data-href='https://kuhlosulmerch.bigcartel.com'>Merch</li>
         </a>
       </ul>
     </div>
