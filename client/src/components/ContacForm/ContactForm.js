@@ -64,7 +64,9 @@ export default function ContactForm() {
 
       sendLimit.saveSentTime();
       window.location.reload();
-      return alert("Message sent. I'll get bat to you as soon as I can!");
+      return alert(
+        "Message sent successfully. I'll get back to you as soon as I can!"
+      );
     } catch (err) {
       return setError('Error sending message.');
     }
@@ -114,7 +116,7 @@ export default function ContactForm() {
         id='body'
         label='body'
         type='text'
-        placeholder='Subject'
+        placeholder='Message body...'
         style={{ minHeight: '250px' }}
       />
       <KButton

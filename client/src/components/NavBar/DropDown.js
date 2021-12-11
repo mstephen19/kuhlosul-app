@@ -44,7 +44,7 @@ export default function DropDown({ position, onClick }) {
         background: '#121212',
         height: 'calc(100vh - 75px)',
         position: 'fixed',
-        bottom: position === 'down' ? '0vh' : '100%',
+        top: position === 'down' ? '75px' : '-100%',
         pointerEvents: position === 'down' ? 'all' : 'none',
         transition: 'all 0.3s linear',
         zIndex: '800',
