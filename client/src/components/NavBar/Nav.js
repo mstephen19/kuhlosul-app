@@ -61,7 +61,7 @@ export default function Nav() {
                   maxHeight: '500%',
                   cursor: 'pointer',
                   pointerEvents: 'initial',
-                  width: 'clamp(200px, 20vw, 500px)',
+                  width: 'clamp(225px, 22vw, 500px)',
                 }}
               />
             </div>

@@ -30,6 +30,7 @@ export default function KFlexBox({
         gap: gap,
         overflowY: overflowY,
         minHeight: minHeight,
+        minWidth: '250px',
       }}
       onChange={onChange}
     >
