@@ -46,7 +46,7 @@ export default function Nav() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                // overflow: 'hidden',
+                overflow: 'hidden',
                 marginRight: '70px',
                 pointerEvents: 'none',
                 cursor: 'default',

@@ -13,6 +13,7 @@ class sendLimit {
   canSend() {
     const now = new Date(Date.now());
     const then = this.getLastSent();
+    if (!then) return true;
 
     const timeDiff = Math.abs(then - now);
     const dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
