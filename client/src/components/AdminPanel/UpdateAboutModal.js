@@ -107,6 +107,7 @@ export default function UpdateAboutModal({ ...props }) {
           color='black'
           style={{ color: 'black', minHeight: 'clamp(100px, 30vh, 300px)' }}
           defaultValue={formValues.body}
+          maxLength={2500}
         />
         <KButton disabled={false} text='Submit' onClick={handleSubmit} />
         {query.error || isAdmin.error || error ? (

@@ -63,7 +63,7 @@ export default function ContactForm() {
       });
 
       sendLimit.saveSentTime();
-      window.location.reload();
+      window.location.assign('/');
       return alert(
         "Message sent successfully. I'll get back to you as soon as I can!"
       );
@@ -118,6 +118,7 @@ export default function ContactForm() {
         type='text'
         placeholder='Message body...'
         style={{ minHeight: '250px' }}
+        maxLength={1250}
       />
       <KButton
         disabled={disabled}

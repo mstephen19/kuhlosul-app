@@ -25,6 +25,7 @@ export default function KInput({
         style={{ color: color }}
         onChange={onChange}
         {...props}
+        maxLength={200}
       />
     </Box>
   );
