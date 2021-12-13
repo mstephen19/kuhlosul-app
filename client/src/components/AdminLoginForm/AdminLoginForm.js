@@ -39,6 +39,7 @@ export default function AdminLoginForm() {
       });
     } catch (err) {
       alert('There was an error logging in');
+      console.log(err);
     }
   };
 

@@ -4,12 +4,13 @@ import KButton from '../Styled/KButton';
 import { useMutation, useQuery } from '@apollo/client';
 import { SEED_DATABASE } from '../../utils/mutations';
 import Loading from '../LoadingOverlay/Loading';
-import PasswordModal from './PasswordModal';
-import NewAdminModal from './NewAdminModal';
 import Auth from '../../utils/auth';
 import { Modal, Button } from 'react-bootstrap';
 import { GET_TRACKS } from '../../utils/queries';
-import UpdateAboutModal from './UpdateAboutModal';
+
+const PasswordModal = React.lazy(() => import('./PasswordModal'));
+const NewAdminModal = React.lazy(() => import('./NewAdminModal'));
+const UpdateAboutModal = React.lazy(() => import('./UpdateAboutModal'));
 
 // Later on below the update database button, have a list of all tracks currently in the db
 export default function AdminPanel() {
@@ -177,19 +178,21 @@ export default function AdminPanel() {
         })}
       </div>
 
-      <PasswordModal show={modalShow} onHide={() => setModalShow(false)} />
+      <React.Suspense fallback={<p>Loading...</p>}>
+        <PasswordModal show={modalShow} onHide={() => setModalShow(false)} />
 
-      <NewAdminModal
-        show={adminModalShow}
-        onHide={() => setAdminModalShow(false)}
-      />
-
-      {updateModalShow === true && (
-        <UpdateAboutModal
-          show={updateModalShow}
-          onHide={() => setUpdateModalShow(false)}
+        <NewAdminModal
+          show={adminModalShow}
+          onHide={() => setAdminModalShow(false)}
         />
-      )}
+
+        {updateModalShow === true && (
+          <UpdateAboutModal
+            show={updateModalShow}
+            onHide={() => setUpdateModalShow(false)}
+          />
+        )}
+      </React.Suspense>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
