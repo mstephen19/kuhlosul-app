@@ -26,6 +26,13 @@ export const GET_ABOUT = gql`
     getAbout {
       header
       body
+      showFeatured
+      featuredTrack {
+        thumbnailLink
+        title
+        description
+        releaseDate
+      }
     }
   }
 `;

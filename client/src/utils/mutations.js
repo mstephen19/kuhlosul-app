@@ -43,17 +43,19 @@ export const UPDATE_ABOUT = gql`
     updateAbout(header: $header, body: $body) {
       header
       body
+      showFeatured
+      featuredTrack {
+        thumbnailLink
+        title
+        description
+        releaseDate
+      }
     }
   }
 `;
 
 export const SEND_MESSAGE = gql`
-  mutation sendMessage(
-    $email: String!
-    $type: String!
-    $subject: String!
-    $body: String!
-  ) {
+  mutation sendMessage($email: String!, $type: String!, $subject: String!, $body: String!) {
     sendMessage(email: $email, type: $type, subject: $subject, body: $body) {
       status
     }

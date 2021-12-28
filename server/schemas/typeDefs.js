@@ -26,9 +26,19 @@ const typeDefs = gql`
     body: String
   }
 
+  type featuredTrack {
+    _id: ID
+    thumbnailLink: String
+    title: String
+    description: String
+    releaseDate: Date
+  }
+
   type About {
     header: String
     body: String
+    showFeatured: Boolean
+    featuredTrack: featuredTrack
   }
 
   type Auth {
@@ -56,12 +66,7 @@ const typeDefs = gql`
     changePassword(password: String!): Admin
     createAdmin(email: String!, password: String!): Admin
     updateAbout(header: String!, body: String!): About
-    sendMessage(
-      email: String!
-      type: String!
-      subject: String!
-      body: String!
-    ): Status
+    sendMessage(email: String!, type: String!, subject: String!, body: String!): Status
   }
 `;
 

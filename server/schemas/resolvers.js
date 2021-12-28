@@ -38,8 +38,7 @@ const resolvers = {
   },
   Mutation: {
     seed: async (parent, args, context) => {
-      if (!context.admin)
-        return new AuthenticationError('Failed to authenticate Admin');
+      if (!context.admin) return new AuthenticationError('Failed to authenticate Admin');
       const checkAdmin = await Admin.findById(context.admin._id);
       if (!checkAdmin) {
         return new AuthenticationError('Failed to authenticate Admin');
@@ -55,7 +54,7 @@ const resolvers = {
       return tracks;
     },
     login: async (parent, { email, password }) => {
-      email = email.toLowerCase()
+      email = email.toLowerCase();
       const admin = await Admin.findOne({ email });
 
       if (!admin) return new Error('No admin with this email found!');
@@ -68,20 +67,14 @@ const resolvers = {
       return { token, admin };
     },
     changePassword: async (parent, { password }, context) => {
-      if (!context.admin)
-        return new AuthenticationError('Failed to authenticate Admin');
+      if (!context.admin) return new AuthenticationError('Failed to authenticate Admin');
 
-      const withNewPassword = await Admin.findOneAndUpdate(
-        { _id: context.admin._id },
-        { password: password },
-        { new: true }
-      );
+      const withNewPassword = await Admin.findOneAndUpdate({ _id: context.admin._id }, { password: password }, { new: true });
 
       return withNewPassword;
     },
     createAdmin: async (parent, args, context) => {
-      if (!context.admin)
-        return new AuthenticationError('Failed to authenticate current Admin');
+      if (!context.admin) return new AuthenticationError('Failed to authenticate current Admin');
 
       try {
         const newAdmin = await Admin.create(args);
@@ -92,15 +85,10 @@ const resolvers = {
       }
     },
     updateAbout: async (parent, { header, body }, context) => {
-      if (!context.admin)
-        return new AuthenticationError('Failed to authenticate current Admin');
+      if (!context.admin) return new AuthenticationError('Failed to authenticate current Admin');
 
       try {
-        const updated = await About.findOneAndUpdate(
-          { code: 123 },
-          { header, body },
-          { new: true, fields: { code: 0 } }
-        );
+        const updated = await About.findOneAndUpdate({ code: 123 }, { header, body }, { new: true, fields: { code: 0 } });
 
         if (!updated) return new Error('Failed to update the homepage!');
 
@@ -111,8 +99,7 @@ const resolvers = {
     },
     sendMessage: async (parent, { email, type, subject, body }) => {
       try {
-        const to =
-          type === 'Promos' ? process.env.PROMO_EMAIL : process.env.MAIN_EMAIL;
+        const to = type === 'Promos' ? process.env.PROMO_EMAIL : process.env.MAIN_EMAIL;
         const em = process.env.EMAIL;
         const pw = process.env.PASSWORD;
 

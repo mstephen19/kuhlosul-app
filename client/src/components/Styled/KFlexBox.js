@@ -13,6 +13,7 @@ export default function KFlexBox({
   gap = '0',
   overflowY,
   minHeight,
+  sx
 }) {
   return (
     <div
@@ -31,6 +32,8 @@ export default function KFlexBox({
         overflowY: overflowY,
         minHeight: minHeight,
         minWidth: '250px',
+        maxWidth: '1500px',
+        ...sx
       }}
       onChange={onChange}
     >

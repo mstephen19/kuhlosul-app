@@ -15,7 +15,7 @@ class ScScraper {
       throw new Error('Failed to grab user info.');
     }
   };
-  /*
+  /**
    * @param {username} SoundCloud Username
    * @param {query} 'tracks' or 'reposts' DEFAULT 'tracks'
    * @param {slower} boolean. If true, autoScroll will run slower DEFAULT false
@@ -46,7 +46,7 @@ class ScScraper {
     }
   };
 
-  /*
+  /**
    * @param {username} SoundCloud Username
    * @param {artistName} The name the artist goes by, searching all of their playlists for tracks including their name
    *
@@ -127,7 +127,9 @@ class ScScraper {
     try {
       const infoArr = [];
       for await (let obj of array) {
-        const songInfo = await client.getSongInfo(obj.url);
+        const songInfo = await client.getSongInfo(obj.url, {
+          fetchComments: true,
+        });
         infoArr.push(songInfo);
       }
       return infoArr;
